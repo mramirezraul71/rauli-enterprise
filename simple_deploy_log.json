@@ -24,10 +24,24 @@
       "step": "Git repo init",
       "status": "success",
       "details": "Repositorio Git configurado"
+    },
+    {
+      "timestamp": "2026-02-06T09:06:48.235315",
+      "step": "Git push",
+      "status": "success",
+      "details": "Código subido a GitHub"
+    },
+    {
+      "timestamp": "2026-02-06T09:06:49.078888",
+      "step": "Vercel-GitHub connection",
+      "status": "error",
+      "details": "Error 400: {\"error\":{\"code\":\"bad_request\",\"message\":\"To link a GitHub repository, you need to install the GitHub integration first. Make sure there aren't any typos and that you have access to the repository if it's private.\",\"action\":\"Install GitHub App\",\"link\":\"https://github.com/apps/vercel\",\"repo\":\"rauli-enterprise\"}}"
     }
   ],
   "current_step": null,
-  "errors": [],
+  "errors": [
+    "Error 400: {\"error\":{\"code\":\"bad_request\",\"message\":\"To link a GitHub repository, you need to install the GitHub integration first. Make sure there aren't any typos and that you have access to the repository if it's private.\",\"action\":\"Install GitHub App\",\"link\":\"https://github.com/apps/vercel\",\"repo\":\"rauli-enterprise\"}}"
+  ],
   "success": false,
   "repo_url": "https://github.com/mramirezraul71/rauli-enterprise",
   "deployment_url": null
