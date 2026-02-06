@@ -1,0 +1,782 @@
+version: '3.8'
+
+services:
+  # 🗄️ PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: rauli-postgres
+    environment:
+      POSTGRES_DB: rauli_db
+      POSTGRES_USER: rauli_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rauli_user -d rauli_db"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # 📊 Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: rauli-redis
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis_data:/data
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - "6379:6379"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 📈 Prometheus Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: rauli-prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+
+  # 📊 Grafana Dashboard
+  grafana:
+    image: grafana/grafana:latest
+    container_name: rauli-grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+    ports:
+      - "3000:3000"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  # 🔍 Elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: rauli-elasticsearch
+    environment:
+      - node.name=rauli-es-node
+      - cluster.name=rauli-cluster
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - xpack.security.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 📊 Kibana
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: rauli-kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - elasticsearch
+
+  # 🌐 RAULI Dashboard
+  rauli-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rauli-dashboard
+    environment:
+      - DATABASE_URL=postgresql://rauli_user:${POSTGRES_PASSWORD}@postgres:5432/rauli_db
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - JWT_SECRET=${JWT_SECRET}
+      - ENVIRONMENT=production
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./models:/app/models
+    ports:
+      - "8502:8502"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+      - elasticsearch
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8502/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # 📱 Mobile Web Interface
+  rauli-mobile:
+    build:
+      context: .
+      dockerfile: Dockerfile.mobile
+    container_name: rauli-mobile
+    environment:
+      - DATABASE_URL=postgresql://rauli_user:${POSTGRES_PASSWORD}@postgres:5432/rauli_db
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/0
+      - DASHBOARD_URL=http://rauli-dashboard:8502
+    ports:
+      - "5000:5000"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+      - rauli-dashboard
+
+  # 🔄 Nginx Load Balancer
+  nginx:
+    image: nginx:alpine
+    container_name: rauli-nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./logs/nginx:/var/log/nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - rauli-dashboard
+      - rauli-mobile
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # 📊 InfluxDB for Time Series
+  influxdb:
+    image: influxdb:2.7-alpine
+    container_name: rauli-influxdb
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USER}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_ORG=rauli
+      - DOCKER_INFLUXDB_INIT_BUCKET=metrics
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+      - influxdb_config:/etc/influxdb2
+    ports:
+      - "8086:8086"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 📊 Telegraf Agent
+  telegraf:
+    image: telegraf:1.28-alpine
+    container_name: rauli-telegraf
+    environment:
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
+      - INFLUXDB_ORG=rauli
+      - INFLUXDB_BUCKET=metrics
+    volumes:
+      - ./monitoring/telegraf.conf:/etc/telegraf/telegraf.conf
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /sys:/sys:ro
+      - /proc:/proc:ro
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - influxdb
+
+  # 📧 SMTP Server (MailHog)
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: rauli-mailhog
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 🔄 RabbitMQ Message Queue
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: rauli-rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"  # AMQP
+      - "15672:15672"  # Management UI
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 🧪 Jupyter Notebook
+  jupyter:
+    image: jupyter/scipy-notebook:latest
+    container_name: rauli-jupyter
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN}
+    volumes:
+      - ./notebooks:/home/jovyan/work
+      - ./data:/home/jovyan/data
+    ports:
+      - "8888:8888"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 📊 MinIO Object Storage
+  minio:
+    image: minio/minio:latest
+    container_name: rauli-minio
+    environment:
+      - MINIO_ROOT_USER=${MINIO_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_PASSWORD}
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+
+  # 🔍 Jaeger Tracing
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: rauli-jaeger
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "14268:14268"  # HTTP collector
+      - "14250:14250"  # gRPC collector
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 🔄 Consul Service Discovery
+  consul:
+    image: consul:latest
+    container_name: rauli-consul
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+    volumes:
+      - consul_data:/consul/data
+      - ./config/consul.json:/consul/config/consul.json
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    command: agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0
+
+  # 🔐 Vault Secret Management
+  vault:
+    image: vault:latest
+    container_name: rauli-vault
+    environment:
+      - VAULT_ADDR=http://localhost:8200
+      - VAULT_DEV_ROOT_TOKEN_ID=${VAULT_TOKEN}
+    volumes:
+      - vault_data:/vault/data
+      - ./config/vault.hcl:/vault/config/vault.hcl
+    ports:
+      - "8200:8200"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    cap_add:
+      - IPC_LOCK
+
+  # 📊 Zipkin Tracing
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: rauli-zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 🔄 Apache Kafka
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: rauli-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: rauli-kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: true
+    ports:
+      - "9092:9092"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 📊 Kafka UI
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: rauli-kafka-ui
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=rauli
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
+    ports:
+      - "8080:8080"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - kafka
+      - zookeeper
+
+  # 🔄 Apache Airflow
+  airflow-webserver:
+    image: apache/airflow:2.7.2
+    container_name: rauli-airflow-webserver
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql://rauli_user:${POSTGRES_PASSWORD}@postgres:5432/airflow
+      - AIRFLOW__CORE__FERNET_KEY=${AIRFLOW_FERNET_KEY}
+      - AIRFLOW__WEBSERVER__SECRET_KEY=${AIRFLOW_SECRET_KEY}
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+    ports:
+      - "8081:8080"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - postgres
+
+  airflow-scheduler:
+    image: apache/airflow:2.7.2
+    container_name: rauli-airflow-scheduler
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql://rauli_user:${POSTGRES_PASSWORD}@postgres:5432/airflow
+      - AIRFLOW__CORE__FERNET_KEY=${AIRFLOW_FERNET_KEY}
+      - AIRFLOW__WEBSERVER__SECRET_KEY=${AIRFLOW_SECRET_KEY}
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - postgres
+
+  # 📊 MLflow
+  mlflow:
+    image: python:3.11-slim
+    container_name: rauli-mlflow
+    environment:
+      - MLFLOW_BACKEND_STORE_URI=postgresql://rauli_user:${POSTGRES_PASSWORD}@postgres:5432/mlflow
+      - MLFLOW_DEFAULT_ARTIFACT_ROOT=/mlflow/artifacts
+    volumes:
+      - ./mlflow:/mlflow
+    ports:
+      - "5001:5000"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    command: >
+      bash -c "
+        pip install mlflow psycopg2-binary &&
+        mlflow server --host 0.0.0.0 --port 5000
+      "
+    depends_on:
+      - postgres
+
+  # 🔄 Celery Worker
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rauli-celery-worker
+    environment:
+      - DATABASE_URL=postgresql://rauli_user:${POSTGRES_PASSWORD}@postgres:5432/rauli_db
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/0
+      - CELERY_BROKER_URL=redis://:${REDIS_PASSWORD}@redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://:${REDIS_PASSWORD}@redis:6379/0
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+    command: celery -A rauli_core.celery worker --loglevel=info
+
+  # 🔄 Celery Beat
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rauli-celery-beat
+    environment:
+      - DATABASE_URL=postgresql://rauli_user:${POSTGRES_PASSWORD}@postgres:5432/rauli_db
+      - REDIS_URL=redis://:${REDIS_PASSWORD}@redis:6379/0
+      - CELERY_BROKER_URL=redis://:${REDIS_PASSWORD}@redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://:${REDIS_PASSWORD}@redis:6379/0
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+    command: celery -A rauli_core.celery beat --loglevel=info
+
+  # 📊 Flower (Celery Monitor)
+  flower:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rauli-flower
+    environment:
+      - CELERY_BROKER_URL=redis://:${REDIS_PASSWORD}@redis:6379/0
+    ports:
+      - "5555:5555"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+    command: celery -A rauli_core.celery flower --port=5555
+
+  # 🔍 Selenium Grid
+  selenium-hub:
+    image: selenium/hub:4.15.0
+    container_name: rauli-selenium-hub
+    ports:
+      - "4444:4444"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  selenium-chrome:
+    image: selenium/node-chrome:4.15.0
+    container_name: rauli-selenium-chrome
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - selenium-hub
+
+  # 📊 Portainer (Docker Management)
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: rauli-portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    ports:
+      - "9000:9000"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 🔄 Traefik (API Gateway)
+  traefik:
+    image: traefik:v3.0
+    container_name: rauli-traefik
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.default.acme.tlschallenge=true"
+      - "--certificatesresolvers.default.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.default.acme.storage=/letsencrypt/acme.json"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./letsencrypt:/letsencrypt
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8082:8080"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 📊 Loki (Log Aggregation)
+  loki:
+    image: grafana/loki:latest
+    container_name: rauli-loki
+    volumes:
+      - ./monitoring/loki.yml:/etc/loki/local-config.yaml
+      - loki_data:/loki
+    ports:
+      - "3100:3100"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    command: -config.file=/etc/loki/local-config.yaml
+
+  # 📊 Promtail (Log Collection)
+  promtail:
+    image: grafana/promtail:latest
+    container_name: rauli-promtail
+    volumes:
+      - ./monitoring/promtail.yml:/etc/promtail/config.yml
+      - ./logs:/var/log/rauli
+      - /var/log:/var/log:ro
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    depends_on:
+      - loki
+
+  # 🔄 Redis Cluster
+  redis-cluster-1:
+    image: redis:7-alpine
+    container_name: rauli-redis-cluster-1
+    command: redis-server --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes --appendfilename appendonly.aof
+    volumes:
+      - redis_cluster_1_data:/data
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  redis-cluster-2:
+    image: redis:7-alpine
+    container_name: rauli-redis-cluster-2
+    command: redis-server --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes --appendfilename appendonly.aof
+    volumes:
+      - redis_cluster_2_data:/data
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  redis-cluster-3:
+    image: redis:7-alpine
+    container_name: rauli-redis-cluster-3
+    command: redis-server --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes --appendfilename appendonly.aof
+    volumes:
+      - redis_cluster_3_data:/data
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 📊 ClickHouse (Analytics)
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: rauli-clickhouse
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
+      - ./config/clickhouse.xml:/etc/clickhouse-server/config.xml
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 🔄 Apache Pulsar
+  pulsar:
+    image: apachepulsar/pulsar:latest
+    container_name: rauli-pulsar
+    volumes:
+      - pulsar_data:/pulsar/data
+      - pulsar_conf:/pulsar/conf
+    ports:
+      - "8080:8080"
+      - "6650:6650"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    command: bin/pulsar standalone
+
+  # 📊 NATS Messaging
+  nats:
+    image: nats:latest
+    container_name: rauli-nats
+    volumes:
+      - nats_data:/data
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    command: ["-js", "-m", "8222"]
+
+  # 🔍 OpenTelemetry Collector
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: rauli-otel-collector
+    volumes:
+      - ./monitoring/otel-collector.yml:/etc/otel-collector-config.yml
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+      - "8889:8889"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    command: ["--config=/etc/otel-collector-config.yml"]
+
+  # 📊 Thanos (Global Prometheus)
+  thanos:
+    image: quay.io/thanos/thanos:latest
+    container_name: rauli-thanos
+    volumes:
+      - thanos_data:/data
+    ports:
+      - "10902:10902"
+      - "19192:19192"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+    command: >
+      query
+      --http-address=0.0.0.0:10902
+      --store=dnssrv+_grpc._tcp.prometheus
+      --store=dnssrv+_grpc._tcp.prometheus-replica1
+
+  # 🔄 Cortex (Long-term Prometheus)
+  cortex:
+    image: quay.io/cortexproject/cortex:latest
+    container_name: rauli-cortex
+    volumes:
+      - cortex_data:/data
+      - ./config/cortex.yml:/etc/cortex/cortex.yml
+    ports:
+      - "9009:9009"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+  # 📊 Mimir (Grafana Mimir)
+  mimir:
+    image: grafana/mimir:latest
+    container_name: rauli-mimir
+    volumes:
+      - mimir_data:/data
+      - ./config/mimir.yml:/etc/mimir/mimir.yml
+    ports:
+      - "9008:9008"
+    networks:
+      - rauli-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+  elasticsearch_data:
+  influxdb_data:
+  influxdb_config:
+  rabbitmq_data:
+  minio_data:
+  consul_data:
+  vault_data:
+  kafka_data:
+  zookeeper_data:
+  mlflow_data:
+  portainer_data:
+  loki_data:
+  redis_cluster_1_data:
+  redis_cluster_2_data:
+  redis_cluster_3_data:
+  clickhouse_data:
+  pulsar_data:
+  pulsar_conf:
+  nats_data:
+  thanos_data:
+  cortex_data:
+  mimir_data:
+
+networks:
+  rauli-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

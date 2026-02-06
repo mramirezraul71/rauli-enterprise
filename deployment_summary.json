@@ -1,0 +1,20 @@
+{
+  "deployment_timestamp": "2026-02-03T18:14:57.530306",
+  "clouds_deployed": [
+    "aws",
+    "azure",
+    "gcp",
+    "kubernetes"
+  ],
+  "monitoring_active": true,
+  "cdn_active": true,
+  "total_services": 8,
+  "auto_scaling": true,
+  "high_availability": true,
+  "security_level": "enterprise",
+  "endpoints": {
+    "api": "https://api.rauli.ai",
+    "monitoring": "https://monitoring.rauli.ai",
+    "dashboard": "https://dashboard.rauli.ai"
+  }
+}

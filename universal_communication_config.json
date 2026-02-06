@@ -1,0 +1,36 @@
+{
+  "communication_channels": {
+    "email": {
+      "address": "mramirezraul71@gmail.com",
+      "status": "configured",
+      "requires_app_password": true,
+      "global": true
+    },
+    "sms": {
+      "number": "+19192078141",
+      "status": "configured",
+      "requires_twilio": true,
+      "global": true
+    },
+    "telegram": {
+      "bot": "@rauli_bot",
+      "status": "active",
+      "requires_config": false,
+      "global": true
+    },
+    "webhook": {
+      "url": "https://rauli-bot-webhook.onrender.com/api/message",
+      "status": "configured",
+      "requires_api_key": true,
+      "global": true
+    },
+    "offline": {
+      "path": "C:\\RAULI_CORE\\offline_messages",
+      "status": "active",
+      "requires_internet": false,
+      "global": false
+    }
+  },
+  "setup_date": "2026-02-05T23:56:39.464196",
+  "system_status": "universal_communication_active"
+}

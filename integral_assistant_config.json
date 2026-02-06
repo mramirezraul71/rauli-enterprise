@@ -1,0 +1,36 @@
+{
+  "assistant_profile": {
+    "name": "RAULI",
+    "title": "Asistente Robot Integral",
+    "personality": "professional_efficient",
+    "language": "es",
+    "response_style": "detailed_actionable"
+  },
+  "capabilities": {
+    "voice_interface": true,
+    "text_interface": true,
+    "multimedia_processing": true,
+    "web_search": true,
+    "system_control": true,
+    "file_operations": true,
+    "communication": true,
+    "automation": true,
+    "ai_processing": true,
+    "task_execution": true
+  },
+  "integrations": {
+    "ollama": true,
+    "telegram": true,
+    "whatsapp": true,
+    "email": true,
+    "dashboard": true,
+    "file_system": true,
+    "system_commands": true
+  },
+  "performance": {
+    "response_speed": "fast",
+    "multithreading": true,
+    "caching": true,
+    "logging": "comprehensive"
+  }
+}

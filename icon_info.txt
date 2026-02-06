@@ -1,0 +1,25 @@
+RAULI System Manager - Información del Icono
+=============================================
+
+Icono creado: C:\RAULI_CORE\rauli_icon.ico
+Icono PNG: C:\RAULI_CORE\rauli_icon.png
+
+Descripción:
+- Icono profesional RAULI System
+- Diseño moderno con "R" estilizado
+- Colores: Azul profesional y dorado
+- Tamaños: 16x16 a 256x256 píxeles
+
+Uso:
+- Acceso directo: RAULI System Manager.bat
+- Lanzador: RAULI_Manager.bat
+- Sistema: rauli_service_manager.py
+
+Características:
+- Interfaz gráfica profesional
+- Control centralizado de servicios
+- Monitoreo en tiempo real
+- Logs detallados
+- Gestión de PIDs
+
+Creado: 1770240586.5012965

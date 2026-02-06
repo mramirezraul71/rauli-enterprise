@@ -1,0 +1,44 @@
+{
+  "whatsapp_number_acquisition": {
+    "recommended_option": "virtual_number",
+    "estimated_cost": "$5 USD/mes",
+    "setup_time": "1-2 horas",
+    "privacy_level": "high",
+    "functionality": "full_whatsapp"
+  },
+  "steps": [
+    "choose_option",
+    "configure_number",
+    "setup_whatsapp",
+    "integrate_rauli_bot",
+    "test_circuit"
+  ],
+  "providers": {
+    "virtual_numbers": [
+      "Google Voice",
+      "OpenPhone",
+      "Sideline",
+      "TextNow"
+    ],
+    "whatsapp_api": [
+      "Meta Business",
+      "Twilio",
+      "MessageBird"
+    ],
+    "existing": [
+      "personal_number",
+      "secondary_sim",
+      "prepaid_sim"
+    ]
+  },
+  "integration_points": {
+    "credentials_file": "C:/dev/credenciales.txt",
+    "whatsapp_from": "WHATSAPP_FROM",
+    "webhook_url": "https://rauli-bot-webhook.onrender.com/api/message",
+    "test_commands": [
+      "hola",
+      "estado",
+      "ayuda"
+    ]
+  }
+}

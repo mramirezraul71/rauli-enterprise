@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🤖 RAULI Mobile</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .container { max-width: 100%; padding: 20px; }
+        .header { text-align: center; color: white; margin-bottom: 30px; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header p { font-size: 1.2em; opacity: 0.9; }
+        .card { background: white; border-radius: 15px; padding: 20px; margin: 15px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .card h3 { color: #333; margin-bottom: 15px; font-size: 1.3em; }
+        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; transition: all 0.3s; text-decoration: none; text-align: center; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-success { background: #48bb78; color: white; }
+        .btn-info { background: #4299e1; color: white; }
+        .btn-warning { background: #ed8936; color: white; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .status { display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f7fafc; border-radius: 8px; margin: 10px 0; }
+        .status-online { color: #48bb78; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 480px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 RAULI Mobile</h1>
+            <p>Asistente IA Enterprise en tu móvil</p>
+        </div>
+        
+        <div class="card">
+            <h3>📊 Estado del Sistema</h3>
+            <div class="status">
+                <span>Dashboard Principal</span>
+                <span class="status-online">🟢 Online</span>
+            </div>
+            <div class="status">
+                <span>API Services</span>
+                <span class="status-online">🟢 Active</span>
+            </div>
+            <div class="status">
+                <span>Mobile Bridge</span>
+                <span class="status-online">🟢 Connected</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>🚀 Acceso Rápido</h3>
+            <a href="/mobile" class="btn btn-primary">📱 Dashboard Móvil</a>
+            <a href="/api/dashboard/iframe" class="btn btn-success">🖥️ Dashboard Completo</a>
+            <a href="#" onclick="openChat()" class="btn btn-info">💬 Chat con RAULI</a>
+            <a href="#" onclick="openVoice()" class="btn btn-warning">🎤 Comando de Voz</a>
+        </div>
+        
+        <div class="card">
+            <h3>🛠️ Funciones Disponibles</h3>
+            <div class="grid">
+                <div class="status">
+                    <span>💬 Chat IA</span>
+                    <span>✅</span>
+                </div>
+                <div class="status">
+                    <span>👁️ Visión</span>
+                    <span>✅</span>
+                </div>
+                <div class="status">
+                    <span>📊 Análisis</span>
+                    <span>✅</span>
+                </div>
+                <div class="status">
+                    <span>🎮 Control</span>
+                    <span>✅</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h3>📱 Enlaces Directos</h3>
+            <a href="http://localhost:8502" class="btn btn-primary" target="_blank">🌐 Dashboard Web</a>
+            <a href="http://localhost:3000" class="btn btn-info" target="_blank">📈 Grafana</a>
+            <a href="http://localhost:9090" class="btn btn-warning" target="_blank">🔍 Prometheus</a>
+        </div>
+    </div>
+    
+    <script>
+        function openChat() { alert('Chat IA: ¡Hola! Soy RAULI, tu asistente enterprise. ¿En qué puedo ayudarte?'); }
+        function openVoice() { alert('Voz: Di "Hola RAULI" para activar comando de voz'); }
+        
+        // Auto-refresh status
+        setInterval(() => {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => console.log('Status updated:', data));
+        }, 30000);
+    </script>
+</body>
+</html>

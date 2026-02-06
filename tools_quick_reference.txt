@@ -1,0 +1,64 @@
+🚀 REFERENCIA RÁPIDA - HERRAMIENTAS COGNITIVAS
+==========================================
+
+🧠 AI/ML CORE:
+• torch 2.10.0 - Deep Learning
+• transformers 5.1.0 - NLP Models
+• langchain 1.2.8 - LLM Chains
+• openai 2.15.0 - GPT API
+• anthropic 0.76.0 - Claude API
+
+🤖 REINFORCEMENT LEARNING:
+• gymnasium 1.2.3 - RL Environments
+• stable-baselines3 2.7.1 - RL Algorithms
+
+📊 DATA SCIENCE:
+• numpy 2.3.5 - Numerical Computing
+• pandas 2.3.3 - Data Analysis
+• scikit-learn 1.8.0 - ML Algorithms
+• matplotlib 3.10.8 - Plotting
+• seaborn 0.13.2 - Statistical Viz
+
+🖼️ COMPUTER VISION:
+• opencv-python 4.13.0.90 - Computer Vision
+• pillow 12.0.0 - Image Processing
+• pyautogui 0.9.54 - GUI Automation
+
+🔊 AUDIO PROCESSING:
+• sounddevice 0.5.5 - Audio I/O
+• pydub 0.25.1 - Audio Manipulation
+• torchaudio 2.10.0+cpu - Audio ML
+• openai-whisper 20250625 - Speech Recognition
+
+📝 TEXT & SEARCH:
+• sentence-transformers 5.2.2 - Text Embeddings
+• chromadb 1.4.1 - Vector Database
+• faiss-cpu 1.13.2 - Similarity Search
+
+🌐 WEB & API:
+• fastapi 0.128.0 - REST API
+• streamlit 1.52.2 - Web Apps
+• jupyter 1.1.1 - Notebooks
+
+⚡ ASYNC & QUEUE:
+• redis 7.1.0 - Cache & Broker
+• celery 5.6.2 - Task Queue
+• aiohttp 3.11.15 - Async HTTP
+• websockets 15.0.1 - WebSocket
+
+🎯 CAPACIDADES LISTAS:
+✅ Natural Language Processing
+✅ Reasoning Engine
+✅ Robotic Control
+✅ Multimodal Processing
+✅ Autonomous Agents
+
+🏗️ ARQUITECTURA:
+✅ Sense Layer (Percepción)
+✅ Think Layer (Razonamiento)
+✅ Act Layer (Acción)
+✅ Memory Layer (Memoria)
+✅ Communication Layer (Comunicación)
+
+🚀 ESTADO: COMPLETO Y FUNCIONAL
+👑 LISTO PARA ARQUITECTURA COGNITIVA

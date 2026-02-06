@@ -1,0 +1,19 @@
+{
+  "api_endpoints": {
+    "status": "/api/status",
+    "metrics": "/api/metrics",
+    "nodes": "/api/nodes",
+    "ai_models": "/api/ai-models",
+    "users": "/api/users",
+    "security": "/api/security"
+  },
+  "refresh_interval": 5000,
+  "theme": "dark",
+  "language": "es",
+  "features": {
+    "real_time_updates": true,
+    "notifications": true,
+    "export_data": true,
+    "mobile_responsive": true
+  }
+}

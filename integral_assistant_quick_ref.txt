@@ -1,0 +1,38 @@
+🤖 REFERENCIA RÁPIDA - RAULI INTEGRAL ASSISTANT
+===============================================
+
+🚀 INICIO:
+python C:\RAULI_CORE\rauli_integral_assistant.py
+
+🎤 COMANDOS BÁSICOS:
+• hola - Presentación
+• estado - Estado completo
+• ayuda - Capacidades
+• salir - Cerrar asistente
+
+⚡ COMANDOS AVANZADOS:
+• ejecuta [tarea] - Ejecutar tareas
+• busca [consulta] - Búsqueda web
+• analiza [archivo] - Procesar multimedia
+• envía [mensaje] a [plataforma] - Comunicación
+• crea [archivo] - Operaciones de sistema
+
+📱 COMUNICACIÓN:
+• Voz natural - Habla directamente
+• Texto - Escribe comandos
+• Contexto - Historial automático
+
+🔧 CARACTERÍSTICAS:
+✅ Voz fluida y natural
+✅ IA avanzada con contexto
+✅ Ejecución de tareas complejas
+✅ Procesamiento multimedia
+✅ Comunicación universal
+✅ Control total del sistema
+
+📊 ESTADO:
+🟢 Activo y operativo
+🧠 Todos los módulos funcionando
+⚡ Listo para comandos integrales
+
+👑 RAULI - Asistente Robot Integral

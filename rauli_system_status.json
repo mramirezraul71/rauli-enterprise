@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-02-04 16:44:27",
+  "system_checks": {
+    "ollama": true,
+    "nodejs_npm": false,
+    "service_files": true
+  },
+  "recommendations": [
+    "Instalar Node.js desde https://nodejs.org"
+  ]
+}

@@ -1,0 +1,36 @@
+
+🎨 GUÍA DE IDENTIFICACIÓN - RAULI SYSTEM MANAGER
+
+📂 CARPETA PRINCIPAL:
+C:\RAULI_CORE
+
+🎯 ACCESO DIRECTO EN ESCRITORIO:
+🚀 RAULI SYSTEM MANAGER.bat
+• Icono: 🚀 (cohete)
+• Logo profesional ASCII al iniciar
+• Interfaz gráfica profesional
+
+🌐 COMPONENTES VISUALES:
+• Logo RAULI en ASCII grande
+• Panel de control con 5 servicios
+• Dashboard web moderno
+• Interfaz profesional azul/negro
+
+📱 CÓMO RECONOCERLO:
+1. 🚀 Busca el ícono del cohete en escritorio
+2. 🎨 Verás el logo ASCII grande al iniciar
+3. 📊 Interfaz "RAULI System Manager v2.0"
+4. 🌐 Dashboard con diseño moderno
+
+💡 SI NO LO ENCUENTRAS:
+• Busca "RAULI" en el escritorio
+• Busca "🚀 RAULI SYSTEM MANAGER.bat"
+• O navega a C:\RAULI_CORE
+• Ejecuta rauli_service_manager_fixed_v2.py
+
+🎯 CARACTERÍSTICAS ÚNICAS:
+• Logo ASCII profesional
+• Sistema híbrido IA
+• Dashboard web integrado
+• Control centralizado
+• 8 modelos de IA

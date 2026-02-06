@@ -1,0 +1,496 @@
+[
+  {
+    "boot_timestamp": "2026-02-04T16:06:51.289661",
+    "services_status": {
+      "ollama": {
+        "status": "running",
+        "pid": null,
+        "port": 11434
+      },
+      "dashboard": {
+        "status": "stopped",
+        "pid": null,
+        "port": 4173
+      },
+      "whatsapp": {
+        "status": "running",
+        "pid": 100300,
+        "port": null
+      },
+      "hybrid_system": {
+        "status": "stopped",
+        "pid": null,
+        "port": null
+      },
+      "cloud_architecture": {
+        "status": "stopped",
+        "pid": null,
+        "port": 8000
+      }
+    },
+    "boot_config": {
+      "auto_start": true,
+      "boot_delay": 2,
+      "health_check_interval": 10,
+      "max_retries": 3,
+      "open_browser": true,
+      "log_level": "INFO",
+      "services": {
+        "ollama": {
+          "enabled": true,
+          "timeout": 30
+        },
+        "dashboard": {
+          "enabled": true,
+          "timeout": 15
+        },
+        "whatsapp": {
+          "enabled": true,
+          "timeout": 10
+        },
+        "hybrid_system": {
+          "enabled": true,
+          "timeout": 15
+        },
+        "cloud_architecture": {
+          "enabled": false,
+          "timeout": 20
+        }
+      }
+    },
+    "system_status": {
+      "timestamp": "2026-02-04T16:07:03.518548",
+      "uptime": 12.228887,
+      "services": {
+        "ollama": {
+          "status": "running",
+          "pid": null,
+          "port": 11434
+        },
+        "dashboard": {
+          "status": "stopped",
+          "pid": null,
+          "port": 4173
+        },
+        "whatsapp": {
+          "status": "running",
+          "pid": 100300,
+          "port": null
+        },
+        "hybrid_system": {
+          "status": "stopped",
+          "pid": null,
+          "port": null
+        },
+        "cloud_architecture": {
+          "status": "stopped",
+          "pid": null,
+          "port": 8000
+        }
+      },
+      "boot_config": {
+        "auto_start": true,
+        "boot_delay": 2,
+        "health_check_interval": 10,
+        "max_retries": 3,
+        "open_browser": true,
+        "log_level": "INFO",
+        "services": {
+          "ollama": {
+            "enabled": true,
+            "timeout": 30
+          },
+          "dashboard": {
+            "enabled": true,
+            "timeout": 15
+          },
+          "whatsapp": {
+            "enabled": true,
+            "timeout": 10
+          },
+          "hybrid_system": {
+            "enabled": true,
+            "timeout": 15
+          },
+          "cloud_architecture": {
+            "enabled": false,
+            "timeout": 20
+          }
+        }
+      }
+    }
+  },
+  {
+    "boot_timestamp": "2026-02-04T16:07:21.116108",
+    "services_status": {
+      "ollama": {
+        "status": "running",
+        "pid": null,
+        "port": 11434
+      },
+      "dashboard": {
+        "status": "stopped",
+        "pid": null,
+        "port": 4173
+      },
+      "whatsapp": {
+        "status": "stopped",
+        "pid": null,
+        "port": null
+      },
+      "hybrid_system": {
+        "status": "stopped",
+        "pid": null,
+        "port": null
+      },
+      "cloud_architecture": {
+        "status": "stopped",
+        "pid": null,
+        "port": 8000
+      }
+    },
+    "boot_config": {
+      "auto_start": true,
+      "boot_delay": 2,
+      "health_check_interval": 10,
+      "max_retries": 3,
+      "open_browser": true,
+      "log_level": "INFO",
+      "services": {
+        "ollama": {
+          "enabled": true,
+          "timeout": 30
+        },
+        "dashboard": {
+          "enabled": true,
+          "timeout": 15
+        },
+        "whatsapp": {
+          "enabled": true,
+          "timeout": 10
+        },
+        "hybrid_system": {
+          "enabled": true,
+          "timeout": 15
+        },
+        "cloud_architecture": {
+          "enabled": false,
+          "timeout": 20
+        }
+      }
+    },
+    "system_status": {
+      "timestamp": "2026-02-04T16:07:33.302452",
+      "uptime": 12.186344,
+      "services": {
+        "ollama": {
+          "status": "running",
+          "pid": null,
+          "port": 11434
+        },
+        "dashboard": {
+          "status": "stopped",
+          "pid": null,
+          "port": 4173
+        },
+        "whatsapp": {
+          "status": "stopped",
+          "pid": null,
+          "port": null
+        },
+        "hybrid_system": {
+          "status": "stopped",
+          "pid": null,
+          "port": null
+        },
+        "cloud_architecture": {
+          "status": "stopped",
+          "pid": null,
+          "port": 8000
+        }
+      },
+      "boot_config": {
+        "auto_start": true,
+        "boot_delay": 2,
+        "health_check_interval": 10,
+        "max_retries": 3,
+        "open_browser": true,
+        "log_level": "INFO",
+        "services": {
+          "ollama": {
+            "enabled": true,
+            "timeout": 30
+          },
+          "dashboard": {
+            "enabled": true,
+            "timeout": 15
+          },
+          "whatsapp": {
+            "enabled": true,
+            "timeout": 10
+          },
+          "hybrid_system": {
+            "enabled": true,
+            "timeout": 15
+          },
+          "cloud_architecture": {
+            "enabled": false,
+            "timeout": 20
+          }
+        }
+      }
+    }
+  },
+  {
+    "boot_timestamp": "2026-02-04T16:09:00.645344",
+    "services_status": {
+      "ollama": {
+        "status": "running",
+        "pid": null,
+        "port": 11434
+      },
+      "dashboard": {
+        "status": "stopped",
+        "pid": null,
+        "port": 4173
+      },
+      "whatsapp": {
+        "status": "stopped",
+        "pid": null,
+        "port": null
+      },
+      "hybrid_system": {
+        "status": "running",
+        "pid": 82336,
+        "port": null
+      },
+      "cloud_architecture": {
+        "status": "stopped",
+        "pid": null,
+        "port": 8000
+      }
+    },
+    "boot_config": {
+      "auto_start": true,
+      "boot_delay": 2,
+      "health_check_interval": 10,
+      "max_retries": 3,
+      "open_browser": true,
+      "log_level": "INFO",
+      "services": {
+        "ollama": {
+          "enabled": true,
+          "timeout": 30
+        },
+        "dashboard": {
+          "enabled": true,
+          "timeout": 15
+        },
+        "whatsapp": {
+          "enabled": true,
+          "timeout": 10
+        },
+        "hybrid_system": {
+          "enabled": true,
+          "timeout": 15
+        },
+        "cloud_architecture": {
+          "enabled": false,
+          "timeout": 20
+        }
+      }
+    },
+    "system_status": {
+      "timestamp": "2026-02-04T16:09:12.844208",
+      "uptime": 12.198864,
+      "services": {
+        "ollama": {
+          "status": "running",
+          "pid": null,
+          "port": 11434
+        },
+        "dashboard": {
+          "status": "stopped",
+          "pid": null,
+          "port": 4173
+        },
+        "whatsapp": {
+          "status": "stopped",
+          "pid": null,
+          "port": null
+        },
+        "hybrid_system": {
+          "status": "running",
+          "pid": 82336,
+          "port": null
+        },
+        "cloud_architecture": {
+          "status": "stopped",
+          "pid": null,
+          "port": 8000
+        }
+      },
+      "boot_config": {
+        "auto_start": true,
+        "boot_delay": 2,
+        "health_check_interval": 10,
+        "max_retries": 3,
+        "open_browser": true,
+        "log_level": "INFO",
+        "services": {
+          "ollama": {
+            "enabled": true,
+            "timeout": 30
+          },
+          "dashboard": {
+            "enabled": true,
+            "timeout": 15
+          },
+          "whatsapp": {
+            "enabled": true,
+            "timeout": 10
+          },
+          "hybrid_system": {
+            "enabled": true,
+            "timeout": 15
+          },
+          "cloud_architecture": {
+            "enabled": false,
+            "timeout": 20
+          }
+        }
+      }
+    }
+  },
+  {
+    "boot_timestamp": "2026-02-04T16:11:08.242713",
+    "services_status": {
+      "ollama": {
+        "status": "running",
+        "pid": null,
+        "port": 11434
+      },
+      "dashboard": {
+        "status": "stopped",
+        "pid": null,
+        "port": 4173
+      },
+      "whatsapp": {
+        "status": "running",
+        "pid": 94332,
+        "port": null
+      },
+      "hybrid_system": {
+        "status": "running",
+        "pid": 98008,
+        "port": null
+      },
+      "cloud_architecture": {
+        "status": "stopped",
+        "pid": null,
+        "port": 8000
+      }
+    },
+    "boot_config": {
+      "auto_start": true,
+      "boot_delay": 2,
+      "health_check_interval": 10,
+      "max_retries": 3,
+      "open_browser": true,
+      "log_level": "INFO",
+      "services": {
+        "ollama": {
+          "enabled": true,
+          "timeout": 30
+        },
+        "dashboard": {
+          "enabled": true,
+          "timeout": 15
+        },
+        "whatsapp": {
+          "enabled": true,
+          "timeout": 10
+        },
+        "hybrid_system": {
+          "enabled": true,
+          "timeout": 15
+        },
+        "cloud_architecture": {
+          "enabled": true,
+          "timeout": 20
+        }
+      },
+      "shortcuts": {
+        "desktop": true,
+        "dashboard": true,
+        "startup": false
+      }
+    },
+    "system_status": {
+      "timestamp": "2026-02-04T16:11:23.429803",
+      "uptime": 15.18709,
+      "services": {
+        "ollama": {
+          "status": "running",
+          "pid": null,
+          "port": 11434
+        },
+        "dashboard": {
+          "status": "stopped",
+          "pid": null,
+          "port": 4173
+        },
+        "whatsapp": {
+          "status": "running",
+          "pid": 94332,
+          "port": null
+        },
+        "hybrid_system": {
+          "status": "running",
+          "pid": 98008,
+          "port": null
+        },
+        "cloud_architecture": {
+          "status": "stopped",
+          "pid": null,
+          "port": 8000
+        }
+      },
+      "boot_config": {
+        "auto_start": true,
+        "boot_delay": 2,
+        "health_check_interval": 10,
+        "max_retries": 3,
+        "open_browser": true,
+        "log_level": "INFO",
+        "services": {
+          "ollama": {
+            "enabled": true,
+            "timeout": 30
+          },
+          "dashboard": {
+            "enabled": true,
+            "timeout": 15
+          },
+          "whatsapp": {
+            "enabled": true,
+            "timeout": 10
+          },
+          "hybrid_system": {
+            "enabled": true,
+            "timeout": 15
+          },
+          "cloud_architecture": {
+            "enabled": true,
+            "timeout": 20
+          }
+        },
+        "shortcuts": {
+          "desktop": true,
+          "dashboard": true,
+          "startup": false
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,406 @@
+name: 🚀 RAULI CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+env:
+  PYTHON_VERSION: "3.11"
+  NODE_VERSION: "18"
+
+jobs:
+  # 🔍 Code Quality and Security
+  quality-check:
+    runs-on: ubuntu-latest
+    name: 🔍 Quality & Security Check
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+        cache: 'pip'
+    
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8 black isort bandit safety pytest pytest-cov
+    
+    - name: 🔍 Lint with Flake8
+      run: |
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: ⚫ Check Code Formatting with Black
+      run: |
+        black --check --diff .
+    
+    - name: 📋 Check Import Sorting with isort
+      run: |
+        isort --check-only --diff .
+    
+    - name: 🔒 Security Scan with Bandit
+      run: |
+        bandit -r . -f json -o bandit-report.json || true
+        bandit -r . -f text -o bandit-report.txt || true
+    
+    - name: 🛡️ Dependency Security Check
+      run: |
+        safety check --json --output safety-report.json || true
+        safety check || true
+    
+    - name: 📤 Upload Security Reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: security-reports
+        path: |
+          bandit-report.json
+          bandit-report.txt
+          safety-report.json
+
+  # 🧪 Testing
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+    name: 🧪 Test Python ${{ matrix.python-version }}
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🐍 Setup Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+    
+    - name: 📦 Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-mock pytest-asyncio
+    
+    - name: 🧪 Run Unit Tests
+      run: |
+        pytest tests/unit/ -v --cov=. --cov-report=xml --cov-report=html
+    
+    - name: 🧪 Run Integration Tests
+      run: |
+        pytest tests/integration/ -v --cov=. --cov-append --cov-report=xml
+    
+    - name: 🧪 Run E2E Tests
+      run: |
+        pytest tests/e2e/ -v --cov=. --cov-append --cov-report=xml
+    
+    - name: 📤 Upload Coverage Reports
+      uses: codecov/codecov-action@v3
+      if: matrix.python-version == env.PYTHON_VERSION
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
+  # 🐳 Docker Build and Test
+  docker-build:
+    runs-on: ubuntu-latest
+    name: 🐳 Docker Build & Test
+    needs: quality-check
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🐳 Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: 🔑 Login to Docker Hub
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: 🏷️ Extract Metadata
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        images: rauli/core
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=sha,prefix={{branch}}-
+    
+    - name: 🐳 Build and Push Docker Image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        platforms: linux/amd64,linux/arm64
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    
+    - name: 🧪 Test Docker Image
+      run: |
+        docker run --rm rauli/core:latest python -c "import rauli_core; print('✅ Docker image works!')"
+
+  # 📱 Mobile Build
+  mobile-build:
+    runs-on: ubuntu-latest
+    name: 📱 Mobile Build
+    needs: quality-check
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: 📦 Install Mobile Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install buildozer kivy kivymd
+    
+    - name: 📱 Build Android APK
+      run: |
+        cd professional_tools/mobile
+        buildozer android debug
+      continue-on-error: true
+    
+    - name: 📤 Upload Mobile Artifacts
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: mobile-apk
+        path: professional_tools/mobile/bin/*.apk
+
+  # 🚀 Deploy to Staging
+  deploy-staging:
+    runs-on: ubuntu-latest
+    name: 🚀 Deploy to Staging
+    needs: [test, docker-build]
+    if: github.ref == 'refs/heads/develop'
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🚀 Deploy to Staging Server
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: ${{ secrets.STAGING_HOST }}
+        username: ${{ secrets.STAGING_USER }}
+        key: ${{ secrets.STAGING_SSH_KEY }}
+        script: |
+          cd /opt/rauli
+          docker-compose pull
+          docker-compose up -d
+          docker system prune -f
+    
+    - name: 🧪 Run Health Check
+      run: |
+        sleep 30
+        curl -f ${{ secrets.STAGING_URL }}/health || exit 1
+    
+    - name: 📧 Notify Deployment
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        channel: '#deployments'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+
+  # 🚀 Deploy to Production
+  deploy-production:
+    runs-on: ubuntu-latest
+    name: 🚀 Deploy to Production
+    needs: [test, docker-build]
+    if: github.event_name == 'release'
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 🚀 Deploy to Production Server
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: ${{ secrets.PRODUCTION_HOST }}
+        username: ${{ secrets.PRODUCTION_USER }}
+        key: ${{ secrets.PRODUCTION_SSH_KEY }}
+        script: |
+          cd /opt/rauli
+          docker-compose pull
+          docker-compose up -d
+          docker system prune -f
+    
+    - name: 🧪 Run Health Check
+      run: |
+        sleep 30
+        curl -f ${{ secrets.PRODUCTION_URL }}/health || exit 1
+    
+    - name: 📧 Notify Deployment
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        channel: '#deployments'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+
+  # 📊 Performance Testing
+  performance-test:
+    runs-on: ubuntu-latest
+    name: 📊 Performance Test
+    needs: deploy-staging
+    if: github.ref == 'refs/heads/develop'
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 📊 Run Performance Tests
+      run: |
+        # Install k6 for performance testing
+        sudo gpg -k /usr/share/keyrings/debian.gpg --dearmor > /etc/apt/trusted.gpg.d/debian.gpg
+        echo "deb [signed-by=/etc/apt/trusted.gpg.d/debian.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+        sudo apt-get update
+        sudo apt-get install k6
+        
+        # Run performance tests
+        k6 run --out json=performance-results.json tests/performance/load-test.js
+    
+    - name: 📤 Upload Performance Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-results
+        path: performance-results.json
+
+  # 📋 Generate Reports
+  generate-reports:
+    runs-on: ubuntu-latest
+    name: 📋 Generate Reports
+    needs: [quality-check, test, docker-build, mobile-build]
+    if: always()
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: 📦 Install Dependencies
+      run: |
+        pip install pytest-html coverage-badge
+    
+    - name: 📊 Generate Test Report
+      run: |
+        pytest --html=reports/test-report.html --self-contained-html
+    
+    - name: 📊 Generate Coverage Badge
+      run: |
+        coverage-badge -o reports/coverage-badge.svg
+    
+    - name: 📊 Generate Security Report
+      run: |
+        python scripts/generate_security_report.py
+    
+    - name: 📤 Upload All Reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: reports
+        path: reports/
+
+  # 🎯 Create Release
+  create-release:
+    runs-on: ubuntu-latest
+    name: 🎯 Create Release
+    needs: [test, docker-build, mobile-build]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: 📥 Checkout Code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: 🏷️ Generate Release Notes
+      id: release_notes
+      run: |
+        # Generate release notes from commits
+        echo "## 🚀 RAULI Release $(date +'%Y.%m.%d')" > release_notes.md
+        echo "" >> release_notes.md
+        echo "### 📦 Changes" >> release_notes.md
+        git log --pretty=format:"- %s" $(git describe --tags --abbrev=0)..HEAD >> release_notes.md
+        
+        echo "release_notes_file=release_notes.md" >> $GITHUB_OUTPUT
+    
+    - name: 🎯 Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v$(date +'%Y.%m.%d')
+        name: RAULI v$(date +'%Y.%m.%d')
+        body_path: ${{ steps.release_notes.outputs.release_notes_file }}
+        files: |
+          professional_tools/mobile/bin/*.apk
+          reports/*
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # 📢 Notify Results
+  notify-results:
+    runs-on: ubuntu-latest
+    name: 📢 Notify Results
+    needs: [quality-check, test, docker-build, mobile-build, deploy-staging, deploy-production]
+    if: always()
+    
+    steps:
+    - name: 📧 Send Notification
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        channel: '#ci-cd'
+        webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        text: |
+          🚀 RAULI CI/CD Pipeline Complete
+          📊 Quality: ${{ needs.quality-check.result }}
+          🧪 Tests: ${{ needs.test.result }}
+          🐳 Docker: ${{ needs.docker-build.result }}
+          📱 Mobile: ${{ needs.mobile-build.result }}
+          🚀 Staging: ${{ needs.deploy-staging.result }}
+          🏭 Production: ${{ needs.deploy-production.result }}
+    
+    - name: 📧 Email Notification
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: "RAULI CI/CD Pipeline ${{ job.status }}"
+        to: ${{ secrets.NOTIFICATION_EMAIL }}
+        from: "RAULI CI/CD <noreply@rauli.ai>"
+        body: |
+          🚀 RAULI CI/CD Pipeline Status: ${{ job.status }}
+          
+          📊 Quality Check: ${{ needs.quality-check.result }}
+          🧪 Tests: ${{ needs.test.result }}
+          🐳 Docker Build: ${{ needs.docker-build.result }}
+          📱 Mobile Build: ${{ needs.mobile-build.result }}
+          
+          🔗 View Details: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}

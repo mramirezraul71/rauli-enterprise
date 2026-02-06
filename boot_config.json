@@ -1,0 +1,35 @@
+{
+  "auto_start": true,
+  "boot_delay": 2,
+  "health_check_interval": 10,
+  "max_retries": 3,
+  "open_browser": true,
+  "log_level": "INFO",
+  "services": {
+    "ollama": {
+      "enabled": true,
+      "timeout": 30
+    },
+    "dashboard": {
+      "enabled": true,
+      "timeout": 15
+    },
+    "whatsapp": {
+      "enabled": true,
+      "timeout": 10
+    },
+    "hybrid_system": {
+      "enabled": true,
+      "timeout": 15
+    },
+    "cloud_architecture": {
+      "enabled": true,
+      "timeout": 20
+    }
+  },
+  "shortcuts": {
+    "desktop": true,
+    "dashboard": true,
+    "startup": false
+  }
+}

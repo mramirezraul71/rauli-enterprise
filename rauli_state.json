@@ -1,0 +1,26 @@
+{
+  "conversaciones": {},
+  "configuracion": {
+    "voz_activa": true,
+    "respuestas_audio": true,
+    "idioma": "es",
+    "voz_nombre": "Microsoft Sabina Desktop"
+  },
+  "sesion_actual": {
+    "inicio": "2026-02-03T10:08:15.930746",
+    "chat_actual": null,
+    "usuario_actual": null
+  },
+  "estadisticas": {
+    "mensajes_totales": 0,
+    "respuestas_audio": 0,
+    "sesiones_activas": 0
+  },
+  "instalacion": {
+    "fecha": "2026-02-05T22:50:36.453540",
+    "servicio": "C:\\RAULI_CORE\\rauli_servicio.py",
+    "acceso_directo": "C:\\Users\\r6957\\Desktop\\RAULI-PERMANENTE.lnk",
+    "version": "1.0.0"
+  },
+  "ultima_actualizacion": "2026-02-05T22:50:36.453540"
+}

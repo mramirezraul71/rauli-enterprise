@@ -1,0 +1,28 @@
+{
+  "assistant_profile": {
+    "name": "RAULI",
+    "title": "Asistente Optimizado",
+    "personality": "efficient_concise",
+    "language": "es",
+    "response_style": "direct_actionable"
+  },
+  "optimization": {
+    "avoid_redundancy": true,
+    "cache_responses": true,
+    "unique_audio_only": true,
+    "context_awareness": true,
+    "smart_responses": true
+  },
+  "audio_settings": {
+    "enable_voice": true,
+    "avoid_repetition": true,
+    "max_audio_length": 30,
+    "cache_audio_files": true
+  },
+  "response_control": {
+    "max_response_length": 500,
+    "avoid_similar_responses": true,
+    "context_based_variation": true,
+    "smart_abbreviations": true
+  }
+}

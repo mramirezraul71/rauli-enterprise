@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📱 RAULI Mobile Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #1a202c; color: white; }
+        .header { background: #2d3748; padding: 15px; text-align: center; border-bottom: 3px solid #667eea; }
+        .header h1 { font-size: 1.8em; }
+        .nav { display: flex; justify-content: space-around; background: #2d3748; padding: 10px; position: sticky; top: 0; z-index: 100; }
+        .nav-item { padding: 10px; text-align: center; cursor: pointer; border-radius: 8px; transition: background 0.3s; }
+        .nav-item:hover, .nav-item.active { background: #667eea; }
+        .content { padding: 20px; }
+        .card { background: #2d3748; border-radius: 10px; padding: 15px; margin: 15px 0; }
+        .card h3 { color: #667eea; margin-bottom: 10px; }
+        .status-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #4a5568; }
+        .status-value { color: #48bb78; font-weight: bold; }
+        .btn { background: #667eea; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; margin: 5px 0; width: 100%; }
+        .iframe-container { width: 100%; height: 600px; border: none; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📱 RAULI Mobile Dashboard</h1>
+    </div>
+    
+    <div class="nav">
+        <div class="nav-item active" onclick="showSection('status')">📊 Estado</div>
+        <div class="nav-item" onclick="showSection('chat')">💬 Chat</div>
+        <div class="nav-item" onclick="showSection('vision')">👁️ Visión</div>
+        <div class="nav-item" onclick="showSection('control')">🎮 Control</div>
+    </div>
+    
+    <div class="content">
+        <div id="status" class="section">
+            <div class="card">
+                <h3>📊 Estado del Sistema</h3>
+                <div class="status-item">
+                    <span>Dashboard Principal</span>
+                    <span class="status-value">🟢 Online</span>
+                </div>
+                <div class="status-item">
+                    <span>API Services</span>
+                    <span class="status-value">🟢 Active</span>
+                </div>
+                <div class="status-item">
+                    <span>Conectados</span>
+                    <span class="status-value">1 usuario</span>
+                </div>
+                <div class="status-item">
+                    <span>Última actualización</span>
+                    <span class="status-value">Ahora</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>📈 Métricas</h3>
+                <div class="status-item">
+                    <span>CPU Usage</span>
+                    <span class="status-value">45%</span>
+                </div>
+                <div class="status-item">
+                    <span>Memory</span>
+                    <span class="status-value">2.1 GB</span>
+                </div>
+                <div class="status-item">
+                    <span>Requests/min</span>
+                    <span class="status-value">127</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="chat" class="section" style="display:none;">
+            <div class="card">
+                <h3>💬 Chat con RAULI</h3>
+                <div style="height: 300px; background: #1a202c; border-radius: 8px; padding: 10px; margin-bottom: 10px;">
+                    <div style="margin-bottom: 10px;">
+                        <strong>RAULI:</strong> ¡Hola! Soy tu asistente IA enterprise. ¿En qué puedo ayudarte?
+                    </div>
+                </div>
+                <input type="text" placeholder="Escribe tu mensaje..." style="width: 100%; padding: 10px; border-radius: 8px; border: none; margin-bottom: 10px;">
+                <button class="btn">📤 Enviar</button>
+            </div>
+        </div>
+        
+        <div id="vision" class="section" style="display:none;">
+            <div class="card">
+                <h3>👁️ Sistema de Visión</h3>
+                <div style="height: 200px; background: #1a202c; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+                    📷 Cámara en tiempo real
+                </div>
+                <button class="btn">📷 Capturar</button>
+                <button class="btn">🔍 Analizar</button>
+            </div>
+        </div>
+        
+        <div id="control" class="section" style="display:none;">
+            <div class="card">
+                <h3>🎮 Panel de Control</h3>
+                <button class="btn">🔄 Reiniciar Sistema</button>
+                <button class="btn">📊 Generar Reporte</button>
+                <button class="btn">🔧 Configuración</button>
+                <button class="btn">📱 Modo Móvil</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).style.display = 'block';
+            
+            // Add active class to clicked nav item
+            event.target.classList.add('active');
+        }
+        
+        // Auto-update status
+        setInterval(() => {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Status updated:', data);
+                });
+        }, 10000);
+    </script>
+</body>
+</html>
