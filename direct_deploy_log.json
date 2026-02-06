@@ -1,0 +1,36 @@
+{
+  "started": true,
+  "steps_completed": [
+    {
+      "timestamp": "2026-02-06T09:06:04.883543",
+      "step": "API connection",
+      "status": "success",
+      "details": "Conectado como Unknown"
+    },
+    {
+      "timestamp": "2026-02-06T09:06:05.404462",
+      "step": "Project lookup",
+      "status": "success",
+      "details": "Proyecto encontrado: prj_5WabcfbiLzPC8WLvkW3IB087tZnM"
+    },
+    {
+      "timestamp": "2026-02-06T09:06:05.413554",
+      "step": "Package creation",
+      "status": "success",
+      "details": "Paquete creado: C:\\Users\\r6957\\AppData\\Local\\Temp\\tmpw73l_lst.zip"
+    },
+    {
+      "timestamp": "2026-02-06T09:06:05.428356",
+      "step": "File upload",
+      "status": "error",
+      "details": "Object of type bytes is not JSON serializable"
+    }
+  ],
+  "current_step": null,
+  "errors": [
+    "Object of type bytes is not JSON serializable"
+  ],
+  "success": false,
+  "deployment_url": null,
+  "project_id": "prj_5WabcfbiLzPC8WLvkW3IB087tZnM"
+}

@@ -1,0 +1,101 @@
+{
+  "core_services": {
+    "rauli_dashboard": {
+      "status": "running",
+      "port": 8502,
+      "pid": null,
+      "memory_usage": "unknown",
+      "cpu_usage": "unknown",
+      "last_restart": null,
+      "uptime": "unknown"
+    },
+    "rauli_mobile": {
+      "status": "stopped",
+      "port": 5000,
+      "pid": null,
+      "memory_usage": "unknown",
+      "cpu_usage": "unknown",
+      "last_restart": null,
+      "uptime": "unknown"
+    },
+    "nginx_load_balancer": {
+      "status": "stopped",
+      "port": 80,
+      "pid": null,
+      "memory_usage": "unknown",
+      "cpu_usage": "unknown",
+      "last_restart": null,
+      "uptime": "unknown"
+    }
+  },
+  "database_services": {
+    "postgresql": {
+      "status": "not_installed",
+      "port": 5432,
+      "version": "unknown",
+      "data_directory": "/var/lib/postgresql/data",
+      "config_file": "/etc/postgresql/postgresql.conf"
+    },
+    "redis": {
+      "status": "not_installed",
+      "port": 6379,
+      "version": "unknown",
+      "config_file": "/etc/redis/redis.conf"
+    },
+    "elasticsearch": {
+      "status": "not_installed",
+      "port": 9200,
+      "version": "unknown",
+      "cluster_status": "unknown"
+    }
+  },
+  "monitoring_services": {
+    "prometheus": {
+      "status": "not_installed",
+      "port": 9090,
+      "version": "unknown",
+      "config_file": "/etc/prometheus/prometheus.yml"
+    },
+    "grafana": {
+      "status": "not_installed",
+      "port": 3000,
+      "version": "unknown",
+      "admin_user": "admin",
+      "data_source": "prometheus"
+    },
+    "kibana": {
+      "status": "not_installed",
+      "port": 5601,
+      "version": "unknown",
+      "elasticsearch_host": "localhost:9200"
+    }
+  },
+  "security_services": {
+    "firewall": {
+      "status": "unknown",
+      "active_rules": 0,
+      "blocked_ips": 0,
+      "last_update": null
+    },
+    "ssl_certificates": {
+      "status": "not_configured",
+      "provider": "letsencrypt",
+      "expiry_date": null,
+      "auto_renewal": false
+    }
+  },
+  "backup_services": {
+    "database_backup": {
+      "status": "not_configured",
+      "last_backup": null,
+      "backup_size": 0,
+      "backup_path": "/backups/database/"
+    },
+    "file_backup": {
+      "status": "not_configured",
+      "last_backup": null,
+      "backup_size": 0,
+      "backup_location": "unknown"
+    }
+  }
+}

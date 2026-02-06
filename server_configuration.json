@@ -1,0 +1,214 @@
+{
+  "server_info": {
+    "name": "RAULI Enterprise Server",
+    "version": "2.0",
+    "environment": "production",
+    "deployment_type": "enterprise",
+    "configured_by": "Cascade - Arquitecto Técnico Principal",
+    "configuration_date": "2026-02-06T02:53:55.093953"
+  },
+  "system_requirements": {
+    "minimum": {
+      "cpu": "4 cores",
+      "memory": "8GB RAM",
+      "storage": "100GB SSD",
+      "network": "1Gbps"
+    },
+    "recommended": {
+      "cpu": "8+ cores",
+      "memory": "16GB+ RAM",
+      "storage": "500GB+ SSD",
+      "network": "10Gbps"
+    },
+    "current_system": {
+      "hostname": "RAULITO",
+      "ip_address": "192.168.1.177",
+      "os_type": "windows",
+      "platform": "Windows-10-10.0.26200-SP0",
+      "cpu_count": 12,
+      "memory": {
+        "total": 68282785792,
+        "available": 48371736576,
+        "percent": 29.2
+      },
+      "disk_usage": {
+        "C:": 70.5,
+        "D:": null
+      },
+      "python_version": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+      "timestamp": "2026-02-06T02:53:55.093953"
+    }
+  },
+  "network_configuration": {
+    "dashboard": {
+      "port": 8502,
+      "protocol": "http",
+      "ssl_enabled": false,
+      "domain": "localhost",
+      "path": "/"
+    },
+    "mobile_interface": {
+      "port": 5000,
+      "protocol": "http",
+      "ssl_enabled": false,
+      "domain": "localhost",
+      "path": "/mobile"
+    },
+    "nginx_load_balancer": {
+      "port": 80,
+      "ssl_port": 443,
+      "protocol": "http/https",
+      "ssl_enabled": true,
+      "domain": "rauli-enterprise.com",
+      "cert_path": "/etc/nginx/ssl/"
+    },
+    "monitoring": {
+      "prometheus": {
+        "port": 9090
+      },
+      "grafana": {
+        "port": 3000
+      },
+      "elasticsearch": {
+        "port": 9200
+      },
+      "kibana": {
+        "port": 5601
+      }
+    }
+  },
+  "database_configuration": {
+    "postgresql": {
+      "host": "localhost",
+      "port": 5432,
+      "database": "rauli_db",
+      "user": "rauli_user",
+      "max_connections": 100,
+      "backup_enabled": true,
+      "backup_schedule": "0 2 * * *"
+    },
+    "redis": {
+      "host": "localhost",
+      "port": 6379,
+      "password": "redis_password",
+      "max_memory": "2gb",
+      "persistence_enabled": true
+    },
+    "elasticsearch": {
+      "host": "localhost",
+      "port": 9200,
+      "cluster_name": "rauli-cluster",
+      "nodes": 1,
+      "replicas": 0
+    }
+  },
+  "security_configuration": {
+    "firewall": {
+      "enabled": true,
+      "allowed_ports": [
+        80,
+        443,
+        8502,
+        5000,
+        22
+      ],
+      "blocked_ports": [
+        3306,
+        5432,
+        6379,
+        9200
+      ],
+      "ip_whitelist": [
+        "127.0.0.1",
+        "10.0.0.0/8",
+        "172.16.0.0/12"
+      ]
+    },
+    "ssl_certificates": {
+      "enabled": true,
+      "provider": "letsencrypt",
+      "auto_renewal": true,
+      "cert_path": "/etc/letsencrypt/live/rauli-enterprise.com/"
+    },
+    "authentication": {
+      "method": "jwt",
+      "token_expiry": 3600,
+      "refresh_token_expiry": 86400,
+      "multi_factor_auth": true
+    }
+  },
+  "backup_configuration": {
+    "database_backups": {
+      "enabled": true,
+      "frequency": "daily",
+      "retention_days": 30,
+      "storage_type": "local",
+      "backup_path": "/backups/database/",
+      "compression": true
+    },
+    "file_backups": {
+      "enabled": true,
+      "frequency": "weekly",
+      "retention_weeks": 12,
+      "storage_type": "cloud",
+      "cloud_provider": "aws_s3",
+      "bucket_name": "rauli-enterprise-backups"
+    },
+    "system_backups": {
+      "enabled": true,
+      "frequency": "monthly",
+      "retention_months": 6,
+      "include_logs": true,
+      "include_config": true
+    }
+  },
+  "monitoring_configuration": {
+    "metrics": {
+      "enabled": true,
+      "collection_interval": 15,
+      "retention_days": 30,
+      "exporters": [
+        "node_exporter",
+        "postgres_exporter",
+        "redis_exporter"
+      ]
+    },
+    "logging": {
+      "level": "info",
+      "format": "json",
+      "retention_days": 30,
+      "log_rotation": true,
+      "centralized_logging": true
+    },
+    "alerts": {
+      "enabled": true,
+      "channels": [
+        "email",
+        "slack",
+        "telegram"
+      ],
+      "thresholds": {
+        "cpu_usage": 80,
+        "memory_usage": 85,
+        "disk_usage": 90,
+        "response_time": 5000
+      }
+    }
+  },
+  "scaling_configuration": {
+    "auto_scaling": {
+      "enabled": true,
+      "min_instances": 2,
+      "max_instances": 10,
+      "scale_up_threshold": 70,
+      "scale_down_threshold": 30,
+      "cooldown_period": 300
+    },
+    "load_balancing": {
+      "algorithm": "least_connections",
+      "health_check_interval": 30,
+      "failure_threshold": 3,
+      "backup_servers": true
+    }
+  }
+}

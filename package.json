@@ -1,0 +1,15 @@
+{
+  "name": "rauli-enterprise",
+  "version": "1.0.0",
+  "description": "RAULI Enterprise Platform",
+  "scripts": {
+    "build": "pip install -r requirements.txt",
+    "start": "python dashboard_rauli.py"
+  },
+  "dependencies": {
+    "streamlit": "^1.28.0",
+    "flask": "^2.3.0",
+    "requests": "^2.31.0",
+    "openai": "^1.3.0"
+  }
+}

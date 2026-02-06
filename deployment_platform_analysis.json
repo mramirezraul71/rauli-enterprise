@@ -1,0 +1,1156 @@
+{
+  "analysis_date": "2026-02-06T03:14:05.383657",
+  "platforms": [
+    {
+      "name": "Render",
+      "pricing_model": "Freemium + Usage-based",
+      "free_tier": true,
+      "max_free_apps": 5,
+      "paid_plans": [
+        "Starter ($7/mo)",
+        "Standard ($25/mo)",
+        "Pro ($100/mo)",
+        "Enterprise (Custom)"
+      ],
+      "pricing_range": "$0 - $1000+/mo",
+      "deployment_methods": [
+        "Git",
+        "Docker",
+        "CLI"
+      ],
+      "databases_supported": [
+        "PostgreSQL",
+        "Redis",
+        "MySQL",
+        "MongoDB"
+      ],
+      "custom_domains": true,
+      "ssl_certificates": true,
+      "cdn": true,
+      "auto_scaling": true,
+      "monitoring": true,
+      "api_rate_limits": "100 requests/second (free)",
+      "build_time": "2-5 minutes",
+      "cold_start": "30-60 seconds",
+      "uptime_sla": "99.9%",
+      "support_level": "Email + Community",
+      "enterprise_features": true,
+      "git_integration": true,
+      "ci_cd_integration": true,
+      "environment_variables": true,
+      "background_workers": true,
+      "file_storage": "1GB (free)",
+      "max_file_size": "100MB",
+      "concurrent_connections": "1000 (free)",
+      "regions_available": 5,
+      "pros": [
+        "Excelente para aplicaciones Python",
+        "Servicios de base de datos incluidos",
+        "Despliegue fácil desde Git",
+        "Buen soporte para Docker",
+        "Auto-scaling automático",
+        "Monitoreo integrado",
+        "SSL gratuito",
+        "Dominios personalizados"
+      ],
+      "cons": [
+        "Límites en plan gratuito",
+        "Cold start lento",
+        "Tiempo de construcción moderado",
+        "Menor personalización que Vercel",
+        "Soporte limitado en plan gratuito"
+      ],
+      "recommended_for": [
+        "Aplicaciones Python",
+        "Startups",
+        "Proyectos personales",
+        "MVPs"
+      ],
+      "overall_score": 8.5
+    },
+    {
+      "name": "Vercel",
+      "pricing_model": "Freemium + Usage-based",
+      "free_tier": true,
+      "max_free_apps": 3,
+      "paid_plans": [
+        "Pro ($20/mo)",
+        "Team ($40/mo)",
+        "Enterprise (Custom)"
+      ],
+      "pricing_range": "$0 - $2000+/mo",
+      "deployment_methods": [
+        "Git",
+        "CLI",
+        "API"
+      ],
+      "databases_supported": [
+        "PostgreSQL",
+        "MySQL",
+        "MongoDB",
+        "Redis"
+      ],
+      "custom_domains": true,
+      "ssl_certificates": true,
+      "cdn": true,
+      "auto_scaling": true,
+      "monitoring": true,
+      "api_rate_limits": "100 requests/second (free)",
+      "build_time": "1-3 minutes",
+      "cold_start": "0-5 seconds",
+      "uptime_sla": "99.99%",
+      "support_level": "Email + Community + Premium",
+      "enterprise_features": true,
+      "git_integration": true,
+      "ci_cd_integration": true,
+      "environment_variables": true,
+      "background_workers": true,
+      "file_storage": "100GB (free)",
+      "max_file_size": "250MB",
+      "concurrent_connections": "1000 (free)",
+      "regions_available": 25,
+      "pros": [
+        "Excelente para frontend y fullstack",
+        "CDN global extremadamente rápido",
+        "Cold start casi instantáneo",
+        "Edge functions",
+        "Integración perfecta con React/Next.js",
+        "Preview deployments",
+        "Analytics integrados",
+        "Mejor rendimiento global"
+      ],
+      "cons": [
+        "Más enfocado en frontend",
+        "Configuración compleja para backend puro",
+        "Límites estrictos en plan gratuito",
+        "Menos flexible para aplicaciones Python complejas",
+        "Precios más altos para uso intensivo"
+      ],
+      "recommended_for": [
+        "Frontend",
+        "Fullstack",
+        "Next.js",
+        "React",
+        "Static sites"
+      ],
+      "overall_score": 9.0
+    },
+    {
+      "name": "Railway",
+      "pricing_model": "Usage-based",
+      "free_tier": true,
+      "max_free_apps": 1,
+      "paid_plans": [
+        "Usage-based ($5-500/mo)"
+      ],
+      "pricing_range": "$5 - $500+/mo",
+      "deployment_methods": [
+        "Git",
+        "CLI",
+        "Docker"
+      ],
+      "databases_supported": [
+        "PostgreSQL",
+        "MySQL",
+        "Redis",
+        "MongoDB"
+      ],
+      "custom_domains": true,
+      "ssl_certificates": true,
+      "cdn": true,
+      "auto_scaling": true,
+      "monitoring": true,
+      "api_rate_limits": "1000 requests/second",
+      "build_time": "2-4 minutes",
+      "cold_start": "10-30 seconds",
+      "uptime_sla": "99.9%",
+      "support_level": "Discord + Email",
+      "enterprise_features": false,
+      "git_integration": true,
+      "ci_cd_integration": true,
+      "environment_variables": true,
+      "background_workers": true,
+      "file_storage": "1GB (free)",
+      "max_file_size": "50MB",
+      "concurrent_connections": "1000",
+      "regions_available": 3,
+      "pros": [
+        "Simplicidad extrema",
+        "Despliegue con un comando",
+        "Buen soporte para Python",
+        "Precios transparentes",
+        "Base de datos incluida",
+        "Logs en tiempo real",
+        "Variables de entorno fáciles"
+      ],
+      "cons": [
+        "Solo una app gratuita",
+        "Menor escalabilidad",
+        "Regiones limitadas",
+        "Menos características enterprise",
+        "Soporte limitado"
+      ],
+      "recommended_for": [
+        "Proyectos simples",
+        "Prototipos",
+        "Learning",
+        "Small apps"
+      ],
+      "overall_score": 7.5
+    },
+    {
+      "name": "Heroku",
+      "pricing_model": "Usage-based",
+      "free_tier": false,
+      "max_free_apps": 0,
+      "paid_plans": [
+        "Eco ($5/mo)",
+        "Basic ($7/mo)",
+        "Standard ($25/mo)",
+        "Performance ($250/mo)"
+      ],
+      "pricing_range": "$5 - $1000+/mo",
+      "deployment_methods": [
+        "Git",
+        "CLI",
+        "API"
+      ],
+      "databases_supported": [
+        "PostgreSQL",
+        "Redis",
+        "MongoDB"
+      ],
+      "custom_domains": true,
+      "ssl_certificates": true,
+      "cdn": true,
+      "auto_scaling": true,
+      "monitoring": true,
+      "api_rate_limits": "1000 requests/second",
+      "build_time": "3-6 minutes",
+      "cold_start": "30-60 seconds",
+      "uptime_sla": "99.95%",
+      "support_level": "Email + Premium",
+      "enterprise_features": true,
+      "git_integration": true,
+      "ci_cd_integration": true,
+      "environment_variables": true,
+      "background_workers": true,
+      "file_storage": "1GB",
+      "max_file_size": "100MB",
+      "concurrent_connections": "500",
+      "regions_available": 7,
+      "pros": [
+        "Plataforma estable y madura",
+        "Excelente documentación",
+        "Add-ons extensivos",
+        "Buen soporte para Python",
+        "Pipeline de despliegue robusto",
+        "Enterprise features"
+      ],
+      "cons": [
+        "Sin plan gratuito (eliminado)",
+        "Precios más altos",
+        "Cold start lento",
+        "Menor rendimiento que alternativas modernas",
+        "Configuración compleja"
+      ],
+      "recommended_for": [
+        "Aplicaciones enterprise",
+        "Legacy systems",
+        "Teams grandes"
+      ],
+      "overall_score": 7.0
+    },
+    {
+      "name": "DigitalOcean App Platform",
+      "pricing_model": "Usage-based",
+      "free_tier": true,
+      "max_free_apps": 3,
+      "paid_plans": [
+        "Basic ($5/mo)",
+        "Professional ($20/mo)",
+        "Premium ($60/mo)",
+        "Enterprise (Custom)"
+      ],
+      "pricing_range": "$0 - $500+/mo",
+      "deployment_methods": [
+        "Git",
+        "Docker",
+        "CLI"
+      ],
+      "databases_supported": [
+        "PostgreSQL",
+        "Redis",
+        "MySQL",
+        "MongoDB"
+      ],
+      "custom_domains": true,
+      "ssl_certificates": true,
+      "cdn": true,
+      "auto_scaling": true,
+      "monitoring": true,
+      "api_rate_limits": "1000 requests/second",
+      "build_time": "2-4 minutes",
+      "cold_start": "20-40 seconds",
+      "uptime_sla": "99.9%",
+      "support_level": "24/7 Support",
+      "enterprise_features": true,
+      "git_integration": true,
+      "ci_cd_integration": true,
+      "environment_variables": true,
+      "background_workers": true,
+      "file_storage": "1GB (free)",
+      "max_file_size": "100MB",
+      "concurrent_connections": "1000",
+      "regions_available": 12,
+      "pros": [
+        "Excelente relación precio/rendimiento",
+        "Infraestructura robusta",
+        "Buen soporte para Docker",
+        "Escalabilidad predictible",
+        "Soporte 24/7",
+        "Integración con DO ecosystem"
+      ],
+      "cons": [
+        "Cold start moderado",
+        "Menos optimizado para frontend",
+        "Configuración inicial compleja",
+        "Menos features que Render/Vercel"
+      ],
+      "recommended_for": [
+        "Aplicaciones backend",
+        "Docker apps",
+        "Enterprise",
+        "Scalable apps"
+      ],
+      "overall_score": 8.0
+    },
+    {
+      "name": "Fly.io",
+      "pricing_model": "Usage-based",
+      "free_tier": true,
+      "max_free_apps": 3,
+      "paid_plans": [
+        "Usage-based ($2-200/mo)"
+      ],
+      "pricing_range": "$2 - $200+/mo",
+      "deployment_methods": [
+        "Git",
+        "Docker",
+        "CLI"
+      ],
+      "databases_supported": [
+        "PostgreSQL",
+        "Redis",
+        "MySQL"
+      ],
+      "custom_domains": true,
+      "ssl_certificates": true,
+      "cdn": true,
+      "auto_scaling": true,
+      "monitoring": true,
+      "api_rate_limits": "1000 requests/second",
+      "build_time": "1-3 minutes",
+      "cold_start": "5-15 seconds",
+      "uptime_sla": "99.9%",
+      "support_level": "Discord + Email",
+      "enterprise_features": false,
+      "git_integration": true,
+      "ci_cd_integration": true,
+      "environment_variables": true,
+      "background_workers": true,
+      "file_storage": "3GB (free)",
+      "max_file_size": "100MB",
+      "concurrent_connections": "1000",
+      "regions_available": 20,
+      "pros": [
+        "Global deployment",
+        "Edge computing",
+        "Docker nativo",
+        "Cold start rápido",
+        "Precios muy competitivos",
+        "Buen rendimiento global"
+      ],
+      "cons": [
+        "Plataforma más nueva",
+        "Menor documentación",
+        "Configuración avanzada requerida",
+        "Menos enterprise features"
+      ],
+      "recommended_for": [
+        "Edge apps",
+        "Global apps",
+        "Docker apps",
+        "Performance-critical"
+      ],
+      "overall_score": 8.2
+    },
+    {
+      "name": "AWS App Runner",
+      "pricing_model": "Usage-based",
+      "free_tier": false,
+      "max_free_apps": 0,
+      "paid_plans": [
+        "Usage-based ($0.007/hour + $0.25/GB)"
+      ],
+      "pricing_range": "$10 - $1000+/mo",
+      "deployment_methods": [
+        "Docker",
+        "CLI",
+        "Console"
+      ],
+      "databases_supported": [
+        "PostgreSQL",
+        "MySQL",
+        "Redis",
+        "DynamoDB"
+      ],
+      "custom_domains": true,
+      "ssl_certificates": true,
+      "cdn": true,
+      "auto_scaling": true,
+      "monitoring": true,
+      "api_rate_limits": "1000 requests/second",
+      "build_time": "3-5 minutes",
+      "cold_start": "10-30 seconds",
+      "uptime_sla": "99.9%",
+      "support_level": "AWS Support",
+      "enterprise_features": true,
+      "git_integration": false,
+      "ci_cd_integration": true,
+      "environment_variables": true,
+      "background_workers": true,
+      "file_storage": "1GB",
+      "max_file_size": "100MB",
+      "concurrent_connections": "1000",
+      "regions_available": 25,
+      "pros": [
+        "Integración completa con AWS",
+        "Seguridad enterprise",
+        "Escalabilidad ilimitada",
+        "Cumplimiento normativo",
+        "Red global de AWS",
+        "Servicios adicionales disponibles"
+      ],
+      "cons": [
+        "Complejidad de AWS",
+        "Sin plan gratuito",
+        "Curva de aprendizaje alta",
+        "Configuración compleja",
+        "Precios variables"
+      ],
+      "recommended_for": [
+        "Enterprise",
+        "AWS ecosystem",
+        "Compliance",
+        "Large scale"
+      ],
+      "overall_score": 7.8
+    },
+    {
+      "name": "Google Cloud Run",
+      "pricing_model": "Usage-based",
+      "free_tier": true,
+      "max_free_apps": 10,
+      "paid_plans": [
+        "Usage-based ($0.000024/invocation + $0.0000025/GB-second)"
+      ],
+      "pricing_range": "$0 - $500+/mo",
+      "deployment_methods": [
+        "Docker",
+        "CLI",
+        "Console"
+      ],
+      "databases_supported": [
+        "PostgreSQL",
+        "MySQL",
+        "Redis",
+        "Firestore"
+      ],
+      "custom_domains": true,
+      "ssl_certificates": true,
+      "cdn": true,
+      "auto_scaling": true,
+      "monitoring": true,
+      "api_rate_limits": "1000 requests/second",
+      "build_time": "2-4 minutes",
+      "cold_start": "5-15 seconds",
+      "uptime_sla": "99.95%",
+      "support_level": "Google Cloud Support",
+      "enterprise_features": true,
+      "git_integration": false,
+      "ci_cd_integration": true,
+      "environment_variables": true,
+      "background_workers": true,
+      "file_storage": "10GB (free)",
+      "max_file_size": "32MB",
+      "concurrent_connections": "1000",
+      "regions_available": 35,
+      "pros": [
+        "Infraestructura de Google",
+        "Cold start muy rápido",
+        "Escalabilidad automática",
+        "Integración con GCP",
+        "Seguridad enterprise",
+        "Precios competitivos"
+      ],
+      "cons": [
+        "Configuración compleja",
+        "Requiere conocimiento de GCP",
+        "Menos amigable para beginners",
+        "Documentación técnica"
+      ],
+      "recommended_for": [
+        "Google ecosystem",
+        "Enterprise",
+        "Performance",
+        "ML apps"
+      ],
+      "overall_score": 8.3
+    }
+  ],
+  "rauli_analysis": {
+    "Render": {
+      "score": 83,
+      "reasons": [
+        "Excelente soporte para Python",
+        "Perfecto para Streamlit/Flask",
+        "PostgreSQL nativo",
+        "Background workers soportados",
+        "Cold start lento",
+        "Features enterprise",
+        "Buen plan gratuito",
+        "Alcance limitado",
+        "Soporte básico"
+      ],
+      "recommendation_level": "Muy Bueno",
+      "monthly_cost_estimate": "$0- $1000+",
+      "deployment_complexity": "Fácil",
+      "best_for_rauli": [
+        "Dashboard principal",
+        "Interface móvil",
+        "API backend",
+        "Procesamiento background",
+        "Base de datos principal",
+        "Almacenamiento de archivos"
+      ]
+    },
+    "Vercel": {
+      "score": 90,
+      "reasons": [
+        "Buen soporte para Python",
+        "Requiere configuración adicional",
+        "PostgreSQL nativo",
+        "Background workers soportados",
+        "Cold start rápido",
+        "Features enterprise",
+        "Buen plan gratuito",
+        "Alcance global excelente",
+        "Soporte premium"
+      ],
+      "recommendation_level": "Excelente",
+      "monthly_cost_estimate": "$0- $2000+",
+      "deployment_complexity": "Muy Fácil",
+      "best_for_rauli": [
+        "Interface móvil",
+        "API backend",
+        "Procesamiento background",
+        "Base de datos principal",
+        "Almacenamiento de archivos"
+      ]
+    },
+    "Railway": {
+      "score": 76,
+      "reasons": [
+        "Excelente soporte para Python",
+        "Compatible con Streamlit/Flask",
+        "PostgreSQL nativo",
+        "Background workers soportados",
+        "Cold start moderado",
+        "Features limitados",
+        "Plan gratuito limitado",
+        "Alcance limitado",
+        "Soporte básico"
+      ],
+      "recommendation_level": "Bueno",
+      "monthly_cost_estimate": "$0- $500+",
+      "deployment_complexity": "Muy Fácil",
+      "best_for_rauli": [
+        "Interface móvil",
+        "API backend",
+        "Procesamiento background",
+        "Base de datos principal",
+        "Almacenamiento de archivos"
+      ]
+    },
+    "Heroku": {
+      "score": 79,
+      "reasons": [
+        "Excelente soporte para Python",
+        "Perfecto para Streamlit/Flask",
+        "PostgreSQL nativo",
+        "Background workers soportados",
+        "Cold start lento",
+        "Features enterprise",
+        "Sin plan gratuito",
+        "Alcance limitado",
+        "Soporte premium"
+      ],
+      "recommendation_level": "Bueno",
+      "monthly_cost_estimate": " $1000+/mo",
+      "deployment_complexity": "Complejo",
+      "best_for_rauli": [
+        "Dashboard principal",
+        "API backend",
+        "Procesamiento background",
+        "Base de datos principal",
+        "Almacenamiento de archivos"
+      ]
+    },
+    "DigitalOcean App Platform": {
+      "score": 76,
+      "reasons": [
+        "Soporte Python limitado",
+        "Requiere configuración adicional",
+        "PostgreSQL nativo",
+        "Background workers soportados",
+        "Cold start lento",
+        "Features enterprise",
+        "Buen plan gratuito",
+        "Buen alcance regional",
+        "Soporte premium"
+      ],
+      "recommendation_level": "Bueno",
+      "monthly_cost_estimate": "$0- $500+",
+      "deployment_complexity": "Complejo",
+      "best_for_rauli": [
+        "API backend",
+        "Procesamiento background",
+        "Base de datos principal",
+        "Almacenamiento de archivos"
+      ]
+    },
+    "Fly.io": {
+      "score": 86,
+      "reasons": [
+        "Buen soporte para Python",
+        "Compatible con Streamlit/Flask",
+        "PostgreSQL nativo",
+        "Background workers soportados",
+        "Cold start rápido",
+        "Features limitados",
+        "Buen plan gratuito",
+        "Alcance global excelente",
+        "Soporte básico"
+      ],
+      "recommendation_level": "Muy Bueno",
+      "monthly_cost_estimate": "$0- $200+",
+      "deployment_complexity": "Moderado",
+      "best_for_rauli": [
+        "API backend",
+        "Procesamiento background",
+        "Base de datos principal",
+        "Almacenamiento de archivos"
+      ]
+    },
+    "AWS App Runner": {
+      "score": 73,
+      "reasons": [
+        "Soporte Python limitado",
+        "Requiere configuración adicional",
+        "PostgreSQL nativo",
+        "Background workers soportados",
+        "Cold start moderado",
+        "Features enterprise",
+        "Sin plan gratuito",
+        "Alcance global excelente",
+        "Soporte básico"
+      ],
+      "recommendation_level": "Bueno",
+      "monthly_cost_estimate": " $1000+/mo",
+      "deployment_complexity": "Complejo",
+      "best_for_rauli": [
+        "API backend",
+        "Procesamiento background",
+        "Base de datos principal",
+        "Almacenamiento de archivos"
+      ]
+    },
+    "Google Cloud Run": {
+      "score": 87,
+      "reasons": [
+        "Buen soporte para Python",
+        "Requiere configuración adicional",
+        "PostgreSQL nativo",
+        "Background workers soportados",
+        "Cold start rápido",
+        "Features enterprise",
+        "Buen plan gratuito",
+        "Alcance global excelente",
+        "Soporte básico"
+      ],
+      "recommendation_level": "Muy Bueno",
+      "monthly_cost_estimate": "$0- $500+",
+      "deployment_complexity": "Moderado",
+      "best_for_rauli": [
+        "API backend",
+        "Procesamiento background",
+        "Base de datos principal",
+        "Almacenamiento de archivos"
+      ]
+    }
+  },
+  "recommendations": {
+    "top_recommendation": [
+      "Vercel",
+      {
+        "score": 90,
+        "reasons": [
+          "Buen soporte para Python",
+          "Requiere configuración adicional",
+          "PostgreSQL nativo",
+          "Background workers soportados",
+          "Cold start rápido",
+          "Features enterprise",
+          "Buen plan gratuito",
+          "Alcance global excelente",
+          "Soporte premium"
+        ],
+        "recommendation_level": "Excelente",
+        "monthly_cost_estimate": "$0- $2000+",
+        "deployment_complexity": "Muy Fácil",
+        "best_for_rauli": [
+          "Interface móvil",
+          "API backend",
+          "Procesamiento background",
+          "Base de datos principal",
+          "Almacenamiento de archivos"
+        ]
+      }
+    ],
+    "alternatives": [
+      [
+        "Google Cloud Run",
+        {
+          "score": 87,
+          "reasons": [
+            "Buen soporte para Python",
+            "Requiere configuración adicional",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features enterprise",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte básico"
+          ],
+          "recommendation_level": "Muy Bueno",
+          "monthly_cost_estimate": "$0- $500+",
+          "deployment_complexity": "Moderado",
+          "best_for_rauli": [
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ],
+      [
+        "Fly.io",
+        {
+          "score": 86,
+          "reasons": [
+            "Buen soporte para Python",
+            "Compatible con Streamlit/Flask",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features limitados",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte básico"
+          ],
+          "recommendation_level": "Muy Bueno",
+          "monthly_cost_estimate": "$0- $200+",
+          "deployment_complexity": "Moderado",
+          "best_for_rauli": [
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ]
+    ],
+    "budget_options": [
+      [
+        "Vercel",
+        {
+          "score": 90,
+          "reasons": [
+            "Buen soporte para Python",
+            "Requiere configuración adicional",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features enterprise",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte premium"
+          ],
+          "recommendation_level": "Excelente",
+          "monthly_cost_estimate": "$0- $2000+",
+          "deployment_complexity": "Muy Fácil",
+          "best_for_rauli": [
+            "Interface móvil",
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ],
+      [
+        "Google Cloud Run",
+        {
+          "score": 87,
+          "reasons": [
+            "Buen soporte para Python",
+            "Requiere configuración adicional",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features enterprise",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte básico"
+          ],
+          "recommendation_level": "Muy Bueno",
+          "monthly_cost_estimate": "$0- $500+",
+          "deployment_complexity": "Moderado",
+          "best_for_rauli": [
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ],
+      [
+        "Fly.io",
+        {
+          "score": 86,
+          "reasons": [
+            "Buen soporte para Python",
+            "Compatible con Streamlit/Flask",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features limitados",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte básico"
+          ],
+          "recommendation_level": "Muy Bueno",
+          "monthly_cost_estimate": "$0- $200+",
+          "deployment_complexity": "Moderado",
+          "best_for_rauli": [
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ]
+    ],
+    "performance_options": [
+      [
+        "Vercel",
+        {
+          "score": 90,
+          "reasons": [
+            "Buen soporte para Python",
+            "Requiere configuración adicional",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features enterprise",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte premium"
+          ],
+          "recommendation_level": "Excelente",
+          "monthly_cost_estimate": "$0- $2000+",
+          "deployment_complexity": "Muy Fácil",
+          "best_for_rauli": [
+            "Interface móvil",
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ],
+      [
+        "Google Cloud Run",
+        {
+          "score": 87,
+          "reasons": [
+            "Buen soporte para Python",
+            "Requiere configuración adicional",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features enterprise",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte básico"
+          ],
+          "recommendation_level": "Muy Bueno",
+          "monthly_cost_estimate": "$0- $500+",
+          "deployment_complexity": "Moderado",
+          "best_for_rauli": [
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ],
+      [
+        "Fly.io",
+        {
+          "score": 86,
+          "reasons": [
+            "Buen soporte para Python",
+            "Compatible con Streamlit/Flask",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features limitados",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte básico"
+          ],
+          "recommendation_level": "Muy Bueno",
+          "monthly_cost_estimate": "$0- $200+",
+          "deployment_complexity": "Moderado",
+          "best_for_rauli": [
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ]
+    ],
+    "enterprise_options": [
+      [
+        "Vercel",
+        {
+          "score": 90,
+          "reasons": [
+            "Buen soporte para Python",
+            "Requiere configuración adicional",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features enterprise",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte premium"
+          ],
+          "recommendation_level": "Excelente",
+          "monthly_cost_estimate": "$0- $2000+",
+          "deployment_complexity": "Muy Fácil",
+          "best_for_rauli": [
+            "Interface móvil",
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ],
+      [
+        "Google Cloud Run",
+        {
+          "score": 87,
+          "reasons": [
+            "Buen soporte para Python",
+            "Requiere configuración adicional",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features enterprise",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte básico"
+          ],
+          "recommendation_level": "Muy Bueno",
+          "monthly_cost_estimate": "$0- $500+",
+          "deployment_complexity": "Moderado",
+          "best_for_rauli": [
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ],
+      [
+        "Render",
+        {
+          "score": 83,
+          "reasons": [
+            "Excelente soporte para Python",
+            "Perfecto para Streamlit/Flask",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start lento",
+            "Features enterprise",
+            "Buen plan gratuito",
+            "Alcance limitado",
+            "Soporte básico"
+          ],
+          "recommendation_level": "Muy Bueno",
+          "monthly_cost_estimate": "$0- $1000+",
+          "deployment_complexity": "Fácil",
+          "best_for_rauli": [
+            "Dashboard principal",
+            "Interface móvil",
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ]
+    ],
+    "quick_start_options": [
+      [
+        "Vercel",
+        {
+          "score": 90,
+          "reasons": [
+            "Buen soporte para Python",
+            "Requiere configuración adicional",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start rápido",
+            "Features enterprise",
+            "Buen plan gratuito",
+            "Alcance global excelente",
+            "Soporte premium"
+          ],
+          "recommendation_level": "Excelente",
+          "monthly_cost_estimate": "$0- $2000+",
+          "deployment_complexity": "Muy Fácil",
+          "best_for_rauli": [
+            "Interface móvil",
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ],
+      [
+        "Render",
+        {
+          "score": 83,
+          "reasons": [
+            "Excelente soporte para Python",
+            "Perfecto para Streamlit/Flask",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start lento",
+            "Features enterprise",
+            "Buen plan gratuito",
+            "Alcance limitado",
+            "Soporte básico"
+          ],
+          "recommendation_level": "Muy Bueno",
+          "monthly_cost_estimate": "$0- $1000+",
+          "deployment_complexity": "Fácil",
+          "best_for_rauli": [
+            "Dashboard principal",
+            "Interface móvil",
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ],
+      [
+        "Railway",
+        {
+          "score": 76,
+          "reasons": [
+            "Excelente soporte para Python",
+            "Compatible con Streamlit/Flask",
+            "PostgreSQL nativo",
+            "Background workers soportados",
+            "Cold start moderado",
+            "Features limitados",
+            "Plan gratuito limitado",
+            "Alcance limitado",
+            "Soporte básico"
+          ],
+          "recommendation_level": "Bueno",
+          "monthly_cost_estimate": "$0- $500+",
+          "deployment_complexity": "Muy Fácil",
+          "best_for_rauli": [
+            "Interface móvil",
+            "API backend",
+            "Procesamiento background",
+            "Base de datos principal",
+            "Almacenamiento de archivos"
+          ]
+        }
+      ]
+    ],
+    "final_recommendation": {
+      "platform": "Vercel",
+      "score": 90,
+      "level": "Excelente",
+      "reasons": [
+        "Buen soporte para Python",
+        "Requiere configuración adicional",
+        "PostgreSQL nativo",
+        "Background workers soportados",
+        "Cold start rápido",
+        "Features enterprise",
+        "Buen plan gratuito",
+        "Alcance global excelente",
+        "Soporte premium"
+      ],
+      "estimated_cost": "$0- $2000+",
+      "deployment_steps": [
+        "1. Crear cuenta en Vercel",
+        "2. Instalar Vercel CLI",
+        "3. Configurar vercel.json",
+        "4. Desplegar dashboard como app principal",
+        "5. Configurar API routes para mobile",
+        "6. Configurar base de datos externa",
+        "7. Configurar variables de entorno",
+        "8. Configurar dominio personalizado",
+        "9. Testear preview deployments",
+        "10. Deploy a producción"
+      ],
+      "migration_plan": [
+        "1. Backup de datos actuales",
+        "2. Preparar variables de entorno",
+        "3. Configurar base de datos en nueva plataforma",
+        "4. Migrar datos si es necesario",
+        "5. Testear en staging",
+        "6. Configurar DNS y dominios",
+        "7. Deploy gradual",
+        "8. Monitorizar performance",
+        "9. Switch DNS a nueva plataforma",
+        "10. Desactivar plataforma anterior"
+      ]
+    }
+  }
+}

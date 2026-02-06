@@ -1,0 +1,30 @@
+{
+  "deployment_status": "active",
+  "services": {
+    "dashboard": {
+      "url": "http://localhost:8502",
+      "status": "running",
+      "port": 8502
+    },
+    "mobile": {
+      "url": "http://localhost:5000/mobile",
+      "status": "running",
+      "port": 5000
+    },
+    "vision": {
+      "status": "running",
+      "type": "background_service"
+    }
+  },
+  "deployment_info": {
+    "version": "2.0.0",
+    "deployment_time": "2026-02-06T02:56:15.668709",
+    "deployed_by": "Cascade - Arquitecto Técnico Principal",
+    "deployment_type": "direct_python"
+  },
+  "system_info": {
+    "python_version": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "platform": "win32",
+    "working_directory": "C:\\RAULI_CORE"
+  }
+}

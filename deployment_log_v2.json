@@ -1,0 +1,89 @@
+{
+  "started": true,
+  "steps_completed": [
+    {
+      "timestamp": "2026-02-06T05:42:12.842553",
+      "step": "Node.js check",
+      "status": "success",
+      "details": "Node.js v20.19.0"
+    },
+    {
+      "timestamp": "2026-02-06T05:42:13.146069",
+      "step": "npm check",
+      "status": "success",
+      "details": "npm 10.8.2"
+    },
+    {
+      "timestamp": "2026-02-06T05:42:13.147575",
+      "step": "Credentials check",
+      "status": "success",
+      "details": "Todas las credenciales requeridas presentes"
+    },
+    {
+      "timestamp": "2026-02-06T05:42:13.148580",
+      "step": "RAULI files check",
+      "status": "success",
+      "details": "Archivos de RAULI presentes"
+    },
+    {
+      "timestamp": "2026-02-06T05:42:13.150728",
+      "step": "Vercel auth setup",
+      "status": "success",
+      "details": "Autenticación configurada"
+    },
+    {
+      "timestamp": "2026-02-06T05:42:13.152735",
+      "step": "Vercel config creation",
+      "status": "success",
+      "details": "Configuración guardada en C:\\RAULI_CORE\\vercel.json"
+    },
+    {
+      "timestamp": "2026-02-06T05:42:13.154520",
+      "step": "package.json creation",
+      "status": "success",
+      "details": "package.json creado"
+    },
+    {
+      "timestamp": "2026-02-06T05:42:13.157531",
+      "step": "API handlers creation",
+      "status": "success",
+      "details": "Handlers para API creados"
+    },
+    {
+      "timestamp": "2026-02-06T05:42:13.159530",
+      "step": "Health check creation",
+      "status": "success",
+      "details": "Health check creado"
+    },
+    {
+      "timestamp": "2026-02-06T05:42:13.160530",
+      "step": "Vercel link",
+      "status": "in_progress",
+      "details": "Conectando proyecto..."
+    },
+    {
+      "timestamp": "2026-02-06T05:42:14.319870",
+      "step": "Vercel link",
+      "status": "warning",
+      "details": "Link warning: Vercel CLI 50.12.3\nError: No existing credentials found. Please run `vercel login` or pass \"--token\"\nLearn More: https://err.sh/vercel/no-credentials-found\n"
+    },
+    {
+      "timestamp": "2026-02-06T05:42:14.320870",
+      "step": "Vercel deploy",
+      "status": "in_progress",
+      "details": "Deploying a producción..."
+    },
+    {
+      "timestamp": "2026-02-06T05:42:15.295161",
+      "step": "Vercel deploy",
+      "status": "error",
+      "details": "Vercel CLI 50.12.3\nError: No existing credentials found. Please run `vercel login` or pass \"--token\"\nLearn More: https://err.sh/vercel/no-credentials-found\n"
+    }
+  ],
+  "current_step": "Deploy a Vercel",
+  "errors": [
+    "Vercel CLI 50.12.3\nError: No existing credentials found. Please run `vercel login` or pass \"--token\"\nLearn More: https://err.sh/vercel/no-credentials-found\n"
+  ],
+  "success": false,
+  "deployment_url": null
+}

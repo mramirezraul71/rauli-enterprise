@@ -1,0 +1,121 @@
+{
+  "deployment_info": {
+    "version": "2.0.0",
+    "deployment_date": "2026-02-06T02:53:55.096610",
+    "deployed_by": "Cascade - Arquitecto Técnico Principal",
+    "deployment_method": "docker_compose",
+    "environment": "production"
+  },
+  "containers": {
+    "rauli_dashboard": {
+      "image": "rauli/core:latest",
+      "replicas": 2,
+      "ports": [
+        "8502:8502"
+      ],
+      "environment": {
+        "DATABASE_URL": "postgresql://rauli_user:password@postgres:5432/rauli_db",
+        "REDIS_URL": "redis://redis:6379/0",
+        "ENVIRONMENT": "production"
+      },
+      "volumes": [
+        "./data:/app/data",
+        "./logs:/app/logs"
+      ],
+      "restart_policy": "always",
+      "health_check": {
+        "test": [
+          "CMD",
+          "curl",
+          "-f",
+          "http://localhost:8502/_stcore/health"
+        ],
+        "interval": "30s",
+        "timeout": "10s",
+        "retries": 3
+      }
+    },
+    "rauli_mobile": {
+      "image": "rauli/mobile:latest",
+      "replicas": 1,
+      "ports": [
+        "5000:5000"
+      ],
+      "environment": {
+        "DATABASE_URL": "postgresql://rauli_user:password@postgres:5432/rauli_db",
+        "DASHBOARD_URL": "http://rauli-dashboard:8502"
+      },
+      "restart_policy": "always"
+    },
+    "nginx": {
+      "image": "nginx:alpine",
+      "replicas": 1,
+      "ports": [
+        "80:80",
+        "443:443"
+      ],
+      "volumes": [
+        "./nginx/nginx.conf:/etc/nginx/nginx.conf",
+        "./nginx/ssl:/etc/nginx/ssl"
+      ],
+      "restart_policy": "always"
+    },
+    "postgres": {
+      "image": "postgres:15-alpine",
+      "replicas": 1,
+      "ports": [
+        "5432:5432"
+      ],
+      "environment": {
+        "POSTGRES_DB": "rauli_db",
+        "POSTGRES_USER": "rauli_user",
+        "POSTGRES_PASSWORD": "secure_password"
+      },
+      "volumes": [
+        "postgres_data:/var/lib/postgresql/data"
+      ],
+      "restart_policy": "always"
+    },
+    "redis": {
+      "image": "redis:7-alpine",
+      "replicas": 1,
+      "ports": [
+        "6379:6379"
+      ],
+      "command": "redis-server --appendonly yes --requirepass redis_password",
+      "volumes": [
+        "redis_data:/data"
+      ],
+      "restart_policy": "always"
+    }
+  },
+  "networks": {
+    "rauli-network": {
+      "driver": "bridge",
+      "subnet": "172.20.0.0/16"
+    }
+  },
+  "volumes": {
+    "postgres_data": {
+      "driver": "local"
+    },
+    "redis_data": {
+      "driver": "local"
+    },
+    "logs": {
+      "driver": "local"
+    },
+    "data": {
+      "driver": "local"
+    }
+  },
+  "scaling_policies": {
+    "horizontal_pod_autoscaler": {
+      "enabled": true,
+      "min_replicas": 2,
+      "max_replicas": 10,
+      "target_cpu_utilization": 70,
+      "target_memory_utilization": 80
+    }
+  }
+}
