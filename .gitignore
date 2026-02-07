@@ -162,3 +162,10 @@ final_deploy_log.json
 deployment_report*.md
 render_vs_vercel_analysis.md
 render_deployment_analysis.json
+.venv/
+__pycache__/
+*.pyc
+.env
+cache/
+logs/
+temp/
