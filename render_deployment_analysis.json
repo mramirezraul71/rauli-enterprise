@@ -1,0 +1,373 @@
+{
+  "timestamp": "2026-02-06T09:24:38.035160",
+  "features": {
+    "render_score": 94.20289855072464,
+    "vercel_score": 97.10144927536231,
+    "total_features": 29,
+    "render_supported": 27,
+    "vercel_supported": 28,
+    "feature_details": [
+      {
+        "name": "Python Support",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Soporte nativo para Python"
+      },
+      {
+        "name": "Streamlit Support",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Soporte para Streamlit"
+      },
+      {
+        "name": "Flask Support",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Soporte para Flask"
+      },
+      {
+        "name": "Auto-scaling",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Escalado automático"
+      },
+      {
+        "name": "Custom Domains",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Dominios personalizados"
+      },
+      {
+        "name": "SSL Certificates",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "SSL automático"
+      },
+      {
+        "name": "Environment Variables",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Variables de entorno"
+      },
+      {
+        "name": "Database Support",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "PostgreSQL incluido"
+      },
+      {
+        "name": "Background Workers",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Workers en background"
+      },
+      {
+        "name": "Webhooks",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Webhooks para CI/CD"
+      },
+      {
+        "name": "GitHub Integration",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Integración con GitHub"
+      },
+      {
+        "name": "Auto-deploy on Push",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Auto-deploy automático"
+      },
+      {
+        "name": "Build Cache",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Cache de builds"
+      },
+      {
+        "name": "Preview Deployments",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Deployments de preview"
+      },
+      {
+        "name": "Rollback",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Rollback automático"
+      },
+      {
+        "name": "Metrics",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Métricas integradas"
+      },
+      {
+        "name": "Logs",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Logs en tiempo real"
+      },
+      {
+        "name": "Health Checks",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Health checks"
+      },
+      {
+        "name": "Rate Limiting",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Rate limiting"
+      },
+      {
+        "name": "DDoS Protection",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Protección DDoS"
+      },
+      {
+        "name": "Global CDN",
+        "render": false,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "CDN global"
+      },
+      {
+        "name": "Edge Functions",
+        "render": false,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Funciones edge"
+      },
+      {
+        "name": "Static Site Hosting",
+        "render": true,
+        "vercel": true,
+        "importance": "low",
+        "weight": 1,
+        "notes": "Hosting estático"
+      },
+      {
+        "name": "API Rate Limits",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Límites de API"
+      },
+      {
+        "name": "Custom Build Commands",
+        "render": true,
+        "vercel": true,
+        "importance": "high",
+        "weight": 3,
+        "notes": "Builds personalizados"
+      },
+      {
+        "name": "Docker Support",
+        "render": true,
+        "vercel": false,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Soporte Docker"
+      },
+      {
+        "name": "Private Repos",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Repos privados"
+      },
+      {
+        "name": "Team Collaboration",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Colaboración equipo"
+      },
+      {
+        "name": "Role-based Access",
+        "render": true,
+        "vercel": true,
+        "importance": "medium",
+        "weight": 2,
+        "notes": "Acceso por roles"
+      }
+    ]
+  },
+  "pricing": {
+    "rauli_requirements": {
+      "ram_needed": "1-2GB",
+      "cpu_needed": "Shared-Dedicated",
+      "bandwidth_needed": "100-500GB",
+      "builds_per_month": 50,
+      "functions_needed": true
+    },
+    "render": {
+      "monthly_cost": 25,
+      "annual_cost": 300,
+      "recommended_plan": "Standard",
+      "free_tier_available": true,
+      "free_tier_hours": 750
+    },
+    "vercel": {
+      "monthly_cost": 20,
+      "annual_cost": 240,
+      "recommended_plan": "Pro",
+      "free_tier_available": true,
+      "free_tier_bandwidth": "100GB"
+    },
+    "cost_comparison": {
+      "render_cheaper": false,
+      "difference": 5,
+      "annual_savings_render": 0,
+      "annual_savings_vercel": 60
+    }
+  },
+  "ease": {
+    "render": {
+      "steps": [
+        "Conectar cuenta GitHub",
+        "Importar repositorio",
+        "Configurar build command",
+        "Configurar start command",
+        "Configurar variables de entorno",
+        "Deploy inicial"
+      ],
+      "difficulty": 7,
+      "time_to_deploy": "15-20 minutos",
+      "learning_curve": "Media",
+      "documentation_quality": "Buena",
+      "community_support": "Media"
+    },
+    "vercel": {
+      "steps": [
+        "Conectar cuenta GitHub",
+        "Importar repositorio",
+        "Configurar framework",
+        "Configurar variables de entorno",
+        "Deploy inicial"
+      ],
+      "difficulty": 3,
+      "time_to_deploy": "5-10 minutos",
+      "learning_curve": "Baja",
+      "documentation_quality": "Excelente",
+      "community_support": "Alta"
+    }
+  },
+  "performance": {
+    "render": {
+      "global_cdns": false,
+      "edge_functions": false,
+      "server_locations": [
+        "US-East",
+        "US-West",
+        "EU",
+        "Asia"
+      ],
+      "cold_start_time": "30-60 segundos",
+      "response_time": "100-300ms",
+      "uptime_sla": "99.9%",
+      "scaling_speed": "2-5 minutos"
+    },
+    "vercel": {
+      "global_cdns": true,
+      "edge_functions": true,
+      "server_locations": [
+        "Global Edge Network"
+      ],
+      "cold_start_time": "100-500ms",
+      "response_time": "50-150ms",
+      "uptime_sla": "99.99%",
+      "scaling_speed": "Instantáneo"
+    }
+  },
+  "reliability": {
+    "render": {
+      "uptime_history": "99.9%",
+      "downtime_incidents": "2-3 por año",
+      "support_quality": "Email only (free)",
+      "backup_strategy": "Automático",
+      "disaster_recovery": "Manual",
+      "monitoring": "Básico"
+    },
+    "vercel": {
+      "uptime_history": "99.99%",
+      "downtime_incidents": "1-2 por año",
+      "support_quality": "24/7 (paid)",
+      "backup_strategy": "Automático",
+      "disaster_recovery": "Automático",
+      "monitoring": "Avanzado"
+    }
+  },
+  "scores": [
+    {
+      "platform": "Render",
+      "features_score": 94.20289855072464,
+      "cost_score": 75,
+      "ease_score": 70,
+      "performance_score": 75,
+      "reliability_score": 80,
+      "total_score": 79.55072463768116,
+      "recommendation": "Alternativa"
+    },
+    {
+      "platform": "Vercel",
+      "features_score": 97.10144927536231,
+      "cost_score": 75,
+      "ease_score": 95,
+      "performance_score": 95,
+      "reliability_score": 95,
+      "total_score": 91.52536231884058,
+      "recommendation": "RECOMENDADO"
+    }
+  ],
+  "best_platform": "Vercel",
+  "best_score": 91.52536231884058
+}
