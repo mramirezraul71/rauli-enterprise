@@ -1,0 +1,7 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:👑 RAULI-BOT System
+TEL:+19192078141
+EMAIL:mramirezraul71@gmail.com
+URL:http://localhost:4174
+END:VCARD
