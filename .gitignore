@@ -169,3 +169,23 @@ __pycache__/
 cache/
 logs/
 temp/
+# ===============================
+# RAULI runtime (multimedia/datos)
+# ===============================
+audio/
+vision_data/
+offline_messages/
+*.mp3
+*.wav
+*.jpg
+*.jpeg
+*.png
+
+# Vercel local
+.vercel/
+
+# Archivos de credenciales (extra)
+credenciales*.env
+*.env.backup*
+env
+
